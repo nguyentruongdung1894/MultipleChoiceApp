@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<a href="get-all-question">Click</a>
+Loi
 </body>
 </html>

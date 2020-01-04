@@ -1,0 +1,207 @@
+.container {
+	padding-right: 0px;
+	padding-left: 0px;
+}
+
+.row {
+	margin-top: 10px;
+}
+
+.header {
+	height: 100px;
+	width: 100%;
+	background-color: red;
+	margin-bottom: 15px;
+}
+
+.content {
+	height: 80%;
+}
+
+.navbar {
+	width: 100%;
+	background-color: #0665c0;
+	padding: 0px;
+	margin-bottom: 15px;
+}
+
+.navbar>ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+.navbar>ul>li {
+	float: left;
+}
+
+.navbar>ul>li a {
+	display: block;
+	color: white;
+	text-align: center;
+	padding: 5px 50px;
+	text-decoration: none;
+}
+
+.navbar>ul>li a:hover {
+	background-color: #ffb700;
+}
+
+.active {
+	background-color: #ffb700;
+}
+
+table.table-style-three {
+	font-family: verdana, arial, sans-serif;
+	font-size: 11px;
+	color: #333333;
+	border: 1px #75808a solid;
+	border-collapse: collapse;
+}
+
+table.table-style-three th {
+	text-align: center;
+	padding: 15px;
+	border: 1px #75808a solid;
+	background-color: #0665c0;
+	color: #ffffff;
+}
+
+table.table-style-three tr:hover td {
+	cursor: pointer;
+}
+
+table.table-style-three tr:nth-child(even) td {
+	background-color: #ffffff;
+}
+
+table.table-style-three td {
+	padding: 15px;
+	border: 1px #75808a solid;
+	background-color: #78b7f3;
+	color: #000000;
+}
+
+table.table-style-three tr:nth-child(even) td>button {
+	background-color: #ffffff;
+}
+
+table.table-style-three td>button {
+	border: none;
+	background-color: #78b7f3;
+}
+
+.footer {
+	height: 10%;
+	width: 100%;
+	background-color: #0665c0;
+	color: white;
+	text-align: center;
+	width: 100%;
+}
+
+.modal {
+	display: none;
+	z-index: 1000;
+	width: 100%;
+	height: 100%;
+}
+
+.model-bottom {
+	margin: 200px auto;
+	width: 400px;
+	height: 200px;
+	border: 1px red solid;
+	background: white
+}
+
+.navbarNew {
+	width: 10%;
+	background-color: #0665c0;
+	padding: 0px;
+	margin-bottom: 15px;
+}
+
+.navbarNew>ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+.navbarNew>ul>li a {
+	display: block;
+	color: white;
+	text-align: center;
+	padding: 5px 50px;
+	text-decoration: none;
+}
+
+.navbarNew>ul>li a:hover {
+	background-color: #ffb700;
+}
+
+.containerNew {
+	margin-left: 190px;
+}
+
+@media ( min-width : 1200px) .containerNew {
+	max-width
+	
+	
+	:
+	
+	 
+	
+	1140
+	px
+	
+	
+	;
+}
+
+@media ( min-width : 992px) .containerNew {
+	max-width
+	
+	
+	:
+	
+	 
+	
+	960
+	px
+	
+	
+	;
+}
+
+@media ( min-width : 768px) .containerNew {
+	max-width
+	
+	
+	:
+	
+	 
+	
+	720
+	px
+	
+	
+	;
+}
+
+@media ( min-width : 576px) .containerNew {
+	max-width
+	
+	
+	:
+	
+	 
+	
+	540
+	px
+	
+	
+	;
+}
