@@ -24,8 +24,8 @@ public class QuestionManagementController {
 
 	@RequestMapping(value = "get-all-question", method = RequestMethod.GET)
 	public String GetAllQuestion(ModelMap model) {
-		List<QuestionDTO> listQuestionDTO = questionDTO.GetAllQuestionsDTO();
-		model.addAttribute("listQuestionDTO", listQuestionDTO);
+		List<QuestionDTO> listQuestionsDTO = questionDTO.GetAllQuestionsDTO();
+		model.addAttribute("listQuestionsDTO", listQuestionsDTO);
 		return "get-all-questions";
 	}
 	

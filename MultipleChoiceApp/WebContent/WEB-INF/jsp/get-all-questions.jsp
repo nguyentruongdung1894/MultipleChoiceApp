@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Bootstrap 4 Jquery Pagination</title>
+<title>List Questions</title>
 <link rel='stylesheet'
 	href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css'>
 <link href="<c:url value="/resources/css/styleQuestion.css" />"
@@ -26,7 +26,7 @@
 						Managerment >> List</a></li>
 			</ul>
 		</div>
-		<div class="navbarNew containerNew">
+		<div class="navbarNew container">
 			<ul>
 				<li><a class="" href="" style="padding: 5px 15px">Add new</a></li>
 			</ul>
@@ -44,25 +44,26 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${listQuestionDTO}" var="listQuestionDTO">
+					<c:forEach items="${listQuestionsDTO}" var="listQuestionsDTO">
 						<tr class="content">
-							<td style="text-align: center">${listQuestionDTO.id}</td>
-							<td style="text-align: center">${listQuestionDTO.questionId}</td>
-							<td>${listQuestionDTO.contentQuestion}</td>
-							<td style="text-align: center">${listQuestionDTO.categoryName}</td>
-							<td style="text-align: center">${listQuestionDTO.type}</td>
+							<td style="text-align: center">${listQuestionsDTO.id}</td>
+							<td style="text-align: center">${listQuestionsDTO.questionId}</td>
+							<td>${listQuestionsDTO.contentQuestion}</td>
+							<td style="text-align: center">${listQuestionsDTO.categoryName}</td>
+							<td style="text-align: center">${listQuestionsDTO.type}</td>
 							<td style="text-align: center"><i class='fas fa-pen'
 								style='font-size: 15px; color: #0665c0'></i></td>
-							<%-- <td style="text-align: center"><a
-							href="deleteQuestion?questionId=${listQuestionDTO.questionId}"><i
-								class='far fa-trash-alt' style='font-size: 15px; color: #0665c0'></i></a></td> --%>
-							<td style="text-align: center">
+							<td style="text-align: center"><a
+								href="deleteQuestion?questionId=${listQuestionsDTO.questionId}"><i
+									class='far fa-trash-alt'
+									style='font-size: 15px; color: #0665c0'></i></a></td>
+							<!-- <td style="text-align: center">
 								<button
 									onclick="document.getElementById('id01').style.display='block'">
 									<i class='far fa-trash-alt'
 										style='font-size: 15px; color: #0665c0'></i>
 								</button>
-							</td>
+							</td> -->
 						</tr>
 						<div id="id01" class="modal">
 							<div class="model-bottom">
@@ -78,7 +79,7 @@
 									<div class="" style="float: left; width: 50%">
 										<div style="background: #78b7f3; margin: 0 auto; width: 100px">
 											<a
-												href="deleteQuestion?questionId=${listQuestionDTO.questionId}"
+												href="deleteQuestion?questionId=${listQuestionsDTO.questionId}"
 												style="color: white">OK</a>
 										</div>
 									</div>

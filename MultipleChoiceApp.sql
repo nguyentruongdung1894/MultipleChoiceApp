@@ -37,16 +37,20 @@ create table TB_Admin(
 )
 go
 create table TB_Exam(
-	Examd varchar(25) primary key not null,
-	QuestionId varchar(25) not null,
+	ExamId varchar(25) primary key not null,
 	FullName varchar(255),
 	Phone varchar(25),
 	Email nvarchar(255),
 	ExamDate Date,
-	Answer text,
 	Result int,
 	Status bit
 )
+create table TB_ExamResult(
+	ExamResultId varchar(25) primary key not null,
+	ExamId varchar(25) not null,
+	AnswerId varchar(25) not null,
+)
+
 go
 ALTER TABLE TB_Question ADD FOREIGN KEY (AdminId) REFERENCES TB_Admin(AdminId);
 go
@@ -54,4 +58,4 @@ ALTER TABLE TB_Question ADD FOREIGN KEY (CategoryId) REFERENCES TB_Category(Cate
 go
 ALTER TABLE TB_Answer ADD FOREIGN KEY (QuestionId) REFERENCES TB_Question(QuestionId);
 go
-ALTER TABLE TB_Exam ADD FOREIGN KEY (QuestionId) REFERENCES TB_Question(QuestionId);
+ALTER TABLE TB_ExamResult ADD FOREIGN KEY (ExamId) REFERENCES TB_Exam(ExamId);

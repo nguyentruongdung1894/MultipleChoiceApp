@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>List Categories</title>
+<title>List Users</title>
 <link rel='stylesheet'
 	href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css'>
 <link href="<c:url value="/resources/css/styleQuestion.css" />"
@@ -22,7 +22,7 @@
 	<div class="content">
 		<div class="navbar container">
 			<ul>
-				<li><a class="" href="" style="padding: 5px 15px">Categories
+				<li><a class="" href="" style="padding: 5px 15px">User
 						Managerment >> List</a></li>
 			</ul>
 		</div>
@@ -36,19 +36,25 @@
 				<thead>
 					<tr class="">
 						<th style="width: 5%">No</th>
-						<th style="width: 10%">Category ID</th>
-						<th style="width: 55%">Category Name</th>
-						<th style="width: 20%">Status</th>
+						<th style="width: 10%">Admin ID</th>
+						<th style="width: 10%">Password</th>
+						<th style="width: 15%">FullName</th>
+						<th style="width: 10%">Phone</th>
+						<th style="width: 15%">Email</th>
+						<th style="width: 25%">Address</th>
 						<th colspan="2" style="width: 10%">Management</th>
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${listCategoriesEntity}" var="listCategoriesEntity">
+					<c:forEach items="${listUsersDTO}" var="listUsersDTO">
 						<tr class="content">
-							<td style="text-align: center">1</td>
-							<td style="text-align: center">${listCategoriesEntity.categoryId}</td>
-							<td style="text-align: center">${listCategoriesEntity.categoryName}</td>
-							<td style="text-align: center">${listCategoriesEntity.status}</td>
+							<td style="text-align: center">${listUsersDTO.id}</td>
+							<td style="text-align: center">${listUsersDTO.adminId}</td>
+							<td style="text-align: center">${listUsersDTO.password}</td>
+							<td style="text-align: center">${listUsersDTO.fullName}</td>
+							<td style="text-align: center">${listUsersDTO.phone}</td>
+							<td style="text-align: center">${listUsersDTO.email}</td>
+							<td style="text-align: center">${listUsersDTO.address}</td>
 							<td style="text-align: center"><i class='fas fa-pen'
 								style='font-size: 15px; color: #0665c0'></i></td>
 							<%-- <td style="text-align: center"><a
