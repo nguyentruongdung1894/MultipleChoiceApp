@@ -50,11 +50,4 @@ public class UserDAOImpl implements UserDAO {
 		}
 		return listUsers;
 	}
-//	public static void main(String[] args) {
-//		UserDAOImpl p = new UserDAOImpl();
-//		List<UserEntity> listUsers = p .GetAllUsers();
-//		for (UserEntity userEntity : listUsers) {
-//			System.out.println(userEntity.getAdminId());
-//		}
-//	}
 }
