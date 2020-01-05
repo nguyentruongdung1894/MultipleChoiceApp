@@ -1,6 +1,7 @@
 package usolv.com.vn.DAO.Impl;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -49,5 +50,79 @@ public class UserDAOImpl implements UserDAO {
 			}
 		}
 		return listUsers;
+	}
+
+	@Override
+	public boolean DeleteUser(String userId) {
+		Connection conn = SQLConnection.getConnectionSqlServer();
+		PreparedStatement pstm = null;
+		String sql = "UPDATE TB_Admin SET Status = '0' WHERE AdminId = ?";
+		try {
+			pstm = conn.prepareStatement(sql);
+			pstm.setString(1, userId);
+			pstm.executeUpdate();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return false;
+		} finally {
+			try {
+				pstm.close();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return true;
+	}
+
+	@Override
+	public boolean AddUser(UserEntity userEntity) {
+		boolean check = false;
+		Connection conn = null;
+		PreparedStatement pstm = null;
+		String query = "insert into TB_Admin values(?,?,?,?,?,?,?)";
+		try {
+			conn = SQLConnection.getConnectionSqlServer();
+			pstm = conn.prepareStatement(query);
+			pstm.setString(1, userEntity.getAdminId());
+			pstm.setString(2, userEntity.getPassword());
+			pstm.setString(3, userEntity.getFullName());
+			pstm.setString(4, userEntity.getPhone());
+			pstm.setString(5, userEntity.getEmail());
+			pstm.setString(6, userEntity.getAddress());
+			pstm.setBoolean(7, userEntity.isStatus());
+			int count = pstm.executeUpdate();
+			if (count != 0) {
+				check = true;
+			} else {
+				check = false;
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			try {
+				pstm.close();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return check;
+	}
+
+	@Override
+	public String GetUserByUserId(String userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean UpdateUser(UserEntity userEntity) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

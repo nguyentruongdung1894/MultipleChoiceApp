@@ -28,7 +28,7 @@
 		</div>
 		<div class="navbarNew container">
 			<ul>
-				<li><a class="" href="" style="padding: 5px 15px">Add new</a></li>
+				<li><a class="" href="add-category" style="padding: 5px 15px">Add new</a></li>
 			</ul>
 		</div>
 		<div class="container" id="jar" style="margin-bottom: 20px">
@@ -43,24 +43,24 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${listCategoriesEntity}" var="listCategoriesEntity">
+					<c:forEach items="${listCategoriesDTOEntity}" var="listCategoriesDTOEntity">
 						<tr class="content">
-							<td style="text-align: center">1</td>
-							<td style="text-align: center">${listCategoriesEntity.categoryId}</td>
-							<td style="text-align: center">${listCategoriesEntity.categoryName}</td>
-							<td style="text-align: center">${listCategoriesEntity.status}</td>
+							<td style="text-align: center">${listCategoriesDTOEntity.id}</td>
+							<td style="text-align: center">${listCategoriesDTOEntity.categoryId}</td>
+							<td style="text-align: center">${listCategoriesDTOEntity.categoryName}</td>
+							<td style="text-align: center">${listCategoriesDTOEntity.status}</td>
 							<td style="text-align: center"><i class='fas fa-pen'
 								style='font-size: 15px; color: #0665c0'></i></td>
-							<%-- <td style="text-align: center"><a
-							href="deleteQuestion?questionId=${listQuestionDTO.questionId}"><i
-								class='far fa-trash-alt' style='font-size: 15px; color: #0665c0'></i></a></td> --%>
-							<td style="text-align: center">
+							<td style="text-align: center"><a
+							href="deleteCategory?categoryId=${listCategoriesDTOEntity.categoryId}"><i
+								class='far fa-trash-alt' style='font-size: 15px; color: #0665c0'></i></a></td>
+							<!-- <td style="text-align: center">
 								<button
 									onclick="document.getElementById('id01').style.display='block'">
 									<i class='far fa-trash-alt'
 										style='font-size: 15px; color: #0665c0'></i>
 								</button>
-							</td>
+							</td> -->
 						</tr>
 						<div id="id01" class="modal">
 							<div class="model-bottom">

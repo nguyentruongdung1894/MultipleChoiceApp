@@ -6,4 +6,12 @@ import usolv.com.vn.entitys.UserEntity;
 
 public interface UserDAO {
 	public List<UserEntity> GetAllUsers();
+
+	public boolean DeleteUser(String userId);
+	
+	public boolean AddUser(UserEntity userEntity);
+	
+	public String GetUserByUserId(String userId);
+	
+	public boolean UpdateUser(UserEntity userEntity);
 }

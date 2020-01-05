@@ -1,2 +1,3 @@
 Khi them dialog ko nhan ID ma xoa theo thu tu
 insert cau hoi design chua on
+chua hien duoc cac check box dung voi du lieu khi hien thi update

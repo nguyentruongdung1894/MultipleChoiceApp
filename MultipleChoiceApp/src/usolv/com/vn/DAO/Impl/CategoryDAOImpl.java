@@ -79,4 +79,74 @@ public class CategoryDAOImpl implements CategoryDAO {
 		return listCategories;
 	}
 
+	@Override
+	public boolean DeleteCategory(String categoryId) {
+		Connection conn = SQLConnection.getConnectionSqlServer();
+		PreparedStatement pstm = null;
+		String sql = "UPDATE TB_Category SET Status = '0' WHERE CategoryId = ?";
+		try {
+			pstm = conn.prepareStatement(sql);
+			pstm.setString(1, categoryId);
+			pstm.executeUpdate();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return false;
+		} finally {
+			try {
+				pstm.close();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return true;
+	}
+
+	@Override
+	public boolean AddCategory(CategoryEntity categoryEntity) {
+		boolean check = false;
+		Connection conn = null;
+		PreparedStatement pstm = null;
+		String query = "insert into TB_Category values(?,?,?)";
+		try {
+			conn = SQLConnection.getConnectionSqlServer();
+			pstm = conn.prepareStatement(query);
+			pstm.setString(1, categoryEntity.getCategoryId());
+			pstm.setString(2, categoryEntity.getCategoryName());
+			pstm.setBoolean(3, categoryEntity.isStatus());
+			int count = pstm.executeUpdate();
+			if (count != 0) {
+				check = true;
+			} else {
+				check = false;
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			try {
+				pstm.close();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return check;
+	}
+
+	@Override
+	public boolean UpdateCategory(CategoryEntity categoryEntity) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public CategoryEntity GetCategoryByCategoryId(String categoryId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

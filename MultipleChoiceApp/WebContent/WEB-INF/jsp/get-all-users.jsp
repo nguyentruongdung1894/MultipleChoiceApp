@@ -28,7 +28,7 @@
 		</div>
 		<div class="navbarNew container">
 			<ul>
-				<li><a class="" href="" style="padding: 5px 15px">Add new</a></li>
+				<li><a class="" href="add-user" style="padding: 5px 15px">Add new</a></li>
 			</ul>
 		</div>
 		<div class="container" id="jar" style="margin-bottom: 20px">
@@ -57,16 +57,16 @@
 							<td style="text-align: center">${listUsersDTO.address}</td>
 							<td style="text-align: center"><i class='fas fa-pen'
 								style='font-size: 15px; color: #0665c0'></i></td>
-							<%-- <td style="text-align: center"><a
-							href="deleteQuestion?questionId=${listQuestionDTO.questionId}"><i
-								class='far fa-trash-alt' style='font-size: 15px; color: #0665c0'></i></a></td> --%>
-							<td style="text-align: center">
+							<td style="text-align: center"><a
+							href="deleteUser?adminId=${listUsersDTO.adminId}"><i
+								class='far fa-trash-alt' style='font-size: 15px; color: #0665c0'></i></a></td>
+							<!-- <td style="text-align: center">
 								<button
 									onclick="document.getElementById('id01').style.display='block'">
 									<i class='far fa-trash-alt'
 										style='font-size: 15px; color: #0665c0'></i>
 								</button>
-							</td>
+							</td> -->
 						</tr>
 						<div id="id01" class="modal">
 							<div class="model-bottom">
