@@ -65,13 +65,13 @@
 								</select></li>
 								<li><label>Type</label> <select name="type"
 									class="field-select">
-										<option value="False">Single</option>
-										<option value="True">Multi</option>
+										<option value="false">Single</option>
+										<option value="true">Multi</option>
 								</select></li>
 								<li><label>Status</label> <select name="status"
 									class="field-select">
-										<option value="True">Display</option>
-										<option value="False">Hide</option>
+										<option value="true">Display</option>
+										<option value="false">Hide</option>
 								</select></li>
 								<li><input type="submit" value="Add" /></li>
 							</ul>
@@ -87,18 +87,18 @@
 									placeholder="Answer ID" />
 								<div style="width: 100%">
 									<div style="float: left; width: 80%; padding-right: 15px">
-										<textarea name="answerEntitys[<%=index%>].contentAnswer" id=""
+										<textarea name="answerEntitys[<%=index%>].contentAnswer"
 											class="field-long field-textarea-left"></textarea>
 									</div>
 									<div style="float: left; width: 20%">
 										<div style="height: 25px">
 											<label class="container">True <input type="radio"
-												value="True" checked="checked" name="answerEntitys[<%=index%>].contentAnswer">
+												value="true" checked="checked" name="answerEntitys[<%=index%>].correctAnswer">
 											</label>
 										</div>
 										<div style="height: 25px">
 											<label class="container">False <input type="radio"
-												value="False" checked="checked" name="answerEntitys[<%=index%>].contentAnswer">
+												value="false" checked="checked" name="answerEntitys[<%=index%>].correctAnswer">
 											</label>
 										</div>
 									</div>
