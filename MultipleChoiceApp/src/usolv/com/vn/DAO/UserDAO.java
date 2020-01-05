@@ -11,7 +11,7 @@ public interface UserDAO {
 	
 	public boolean AddUser(UserEntity userEntity);
 	
-	public String GetUserByUserId(String userId);
+	public UserEntity GetUserByUserId(String userId);
 	
 	public boolean UpdateUser(UserEntity userEntity);
 }

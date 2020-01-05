@@ -115,14 +115,76 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public String GetUserByUserId(String userId) {
-		// TODO Auto-generated method stub
-		return null;
+	public UserEntity GetUserByUserId(String userId) {
+		Connection conn = null;
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM TB_Admin WHERE Status = 1 AND AdminId = ?";
+		UserEntity userEntity = new UserEntity();
+		try {
+			conn = SQLConnection.getConnectionSqlServer();
+			pstm = conn.prepareStatement(sql);
+			pstm.setString(1, userId);
+			rs = pstm.executeQuery();
+			while (rs.next()) {
+				userEntity.setAdminId(rs.getString("AdminId"));
+				userEntity.setPassword(rs.getString("Password"));
+				userEntity.setFullName(rs.getString("FullName"));
+				userEntity.setPhone(rs.getString("Phone"));
+				userEntity.setEmail(rs.getString("Email"));
+				userEntity.setAddress(rs.getString("Address"));
+				userEntity.setStatus(rs.getBoolean("Status"));
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}finally {
+			try {
+				rs.close();
+				pstm.close();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return userEntity;
 	}
 
 	@Override
 	public boolean UpdateUser(UserEntity userEntity) {
-		// TODO Auto-generated method stub
-		return false;
+		Connection conn = SQLConnection.getConnectionSqlServer();
+		PreparedStatement pstm = null;
+		String sql = "update TB_Admin set Password = ?, FullName = ?, Phone = ?, Email= ?, Address =?, Status =? where  AdminId = ?";
+		try {
+			pstm = conn.prepareStatement(sql);
+			pstm.setString(1, userEntity.getPassword());
+			pstm.setString(2, userEntity.getFullName());
+			pstm.setString(3, userEntity.getPhone());
+			pstm.setString(4, userEntity.getEmail());
+			pstm.setString(5, userEntity.getAddress());
+			pstm.setBoolean(6, userEntity.isStatus());
+			pstm.setString(7, userEntity.getAdminId());
+			pstm.executeUpdate();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return false;
+		} finally {
+			try {
+				pstm.close();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return true;
 	}
+	
+//	public static void main(String[] args) {
+//		UserDAOImpl a = new UserDAOImpl();
+//		UserEntity userEntity = a.GetUserByUserId("A000004");
+//		System.out.println(userEntity.getFullName());
+//	}
 }

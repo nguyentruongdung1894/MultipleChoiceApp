@@ -58,4 +58,22 @@ public class CategoryManagermentController {
 		}
 		return model;
 	}
+	
+	@RequestMapping(value = "updateCategory", method = RequestMethod.GET)
+	public String UpdateUser(@ModelAttribute("categoryId") String categoryId, ModelMap modelmap) {
+		CategoryEntity categoryEntity = categoryDAO.GetCategoryByCategoryId(categoryId);
+		modelmap.addAttribute("categoryEntity", categoryEntity);
+		return "update-category";
+	}
+	
+	@RequestMapping(value = "update-category-succ", method = RequestMethod.POST)
+	public String UpdateUserSucc(@ModelAttribute("categoryEntity") CategoryEntity categoryEntity) {
+		String model = null;
+		if (categoryDAO.UpdateCategory(categoryEntity)) {
+			model = "redirect:get-all-categories";
+		} else {
+			model = "error";
+		}
+		return model;
+	}
 }

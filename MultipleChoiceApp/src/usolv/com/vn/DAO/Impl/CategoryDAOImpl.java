@@ -139,14 +139,62 @@ public class CategoryDAOImpl implements CategoryDAO {
 
 	@Override
 	public boolean UpdateCategory(CategoryEntity categoryEntity) {
-		// TODO Auto-generated method stub
-		return false;
+		Connection conn = SQLConnection.getConnectionSqlServer();
+		PreparedStatement pstm = null;
+		String sql = "update TB_Category set CategoryName = ?, Status =? where  CategoryId = ?";
+		try {
+			pstm = conn.prepareStatement(sql);
+			pstm.setString(1, categoryEntity.getCategoryName());
+			pstm.setBoolean(2, categoryEntity.isStatus());
+			pstm.setString(3, categoryEntity.getCategoryId());
+			pstm.executeUpdate();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return false;
+		} finally {
+			try {
+				pstm.close();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return true;
 	}
 
 	@Override
 	public CategoryEntity GetCategoryByCategoryId(String categoryId) {
-		// TODO Auto-generated method stub
-		return null;
+		Connection conn = null;
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM TB_Category WHERE Status = 1 AND CategoryId = ?";
+		CategoryEntity categoryEntity = new CategoryEntity();
+		try {
+			conn = SQLConnection.getConnectionSqlServer();
+			pstm = conn.prepareStatement(sql);
+			pstm.setString(1, categoryId);
+			rs = pstm.executeQuery();
+			while (rs.next()) {
+				categoryEntity.setCategoryId(rs.getString("CategoryId"));
+				categoryEntity.setCategoryName(rs.getString("CategoryName"));
+				categoryEntity.setStatus(rs.getBoolean("Status"));
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstm.close();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return categoryEntity;
 	}
 
 }

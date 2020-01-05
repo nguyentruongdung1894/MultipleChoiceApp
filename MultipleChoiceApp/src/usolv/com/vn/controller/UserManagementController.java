@@ -58,4 +58,22 @@ public class UserManagementController {
 		}
 		return model;
 	}
+	
+	@RequestMapping(value = "updateUser", method = RequestMethod.GET)
+	public String UpdateUser(@ModelAttribute("adminId") String adminId, ModelMap modelmap) {
+		UserEntity userEntity = userDAO.GetUserByUserId(adminId);
+		modelmap.addAttribute("userEntity", userEntity);
+		return "update-user";
+	}
+	
+	@RequestMapping(value = "update-user-succ", method = RequestMethod.POST)
+	public String UpdateUserSucc(@ModelAttribute("userEntity") UserEntity userEntity) {
+		String model = null;
+		if (userDAO.UpdateUser(userEntity)) {
+			model = "redirect:get-all-users";
+		} else {
+			model = "error";
+		}
+		return model;
+	}
 }

@@ -49,8 +49,9 @@
 							<td style="text-align: center">${listCategoriesDTOEntity.categoryId}</td>
 							<td style="text-align: center">${listCategoriesDTOEntity.categoryName}</td>
 							<td style="text-align: center">${listCategoriesDTOEntity.status}</td>
-							<td style="text-align: center"><i class='fas fa-pen'
-								style='font-size: 15px; color: #0665c0'></i></td>
+							<td style="text-align: center"><a
+								href="updateCategory?categoryId=${listCategoriesDTOEntity.categoryId}"><i
+									class='fas fa-pen' style='font-size: 15px; color: #0665c0'></i></a></td>
 							<td style="text-align: center"><a
 							href="deleteCategory?categoryId=${listCategoriesDTOEntity.categoryId}"><i
 								class='far fa-trash-alt' style='font-size: 15px; color: #0665c0'></i></a></td>
