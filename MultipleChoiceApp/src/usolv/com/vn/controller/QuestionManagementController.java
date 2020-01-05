@@ -39,9 +39,9 @@ public class QuestionManagementController {
 	}
 
 	@RequestMapping(value = "get-all-question", method = RequestMethod.GET)
-	public String GetAllQuestion(ModelMap model) {
+	public String GetAllQuestion(ModelMap modelmap) {
 		List<QuestionDTO> listQuestionsDTO = questionDTO.GetAllQuestionsDTO();
-		model.addAttribute("listQuestionsDTO", listQuestionsDTO);
+		modelmap.addAttribute("listQuestionsDTO", listQuestionsDTO);
 		return "get-all-questions";
 	}
 
@@ -57,13 +57,13 @@ public class QuestionManagementController {
 	}
 
 	@RequestMapping(value = "add-question")
-	public String SaveQuestion(ModelMap model) {
+	public String SaveQuestion(ModelMap modelmap) {
 		QuestionEntity questionEntity = new QuestionEntity();
 		List<AnswerEntity> listAnswers = new ArrayList<AnswerEntity>();
 		List<CategoryEntity> listCategoriesEntity = categoryDAO.GetAllCategories();
-		model.addAttribute("questionEntity", questionEntity);
-		model.addAttribute("listAnswers", listAnswers);
-		model.addAttribute("listCategoriesEntity", listCategoriesEntity);
+		modelmap.addAttribute("questionEntity", questionEntity);
+		modelmap.addAttribute("listAnswers", listAnswers);
+		modelmap.addAttribute("listCategoriesEntity", listCategoriesEntity);
 		return "add-question";
 	}
 
@@ -71,14 +71,13 @@ public class QuestionManagementController {
 	public String SaveQuestionSucc(HttpServletRequest request,
 			@ModelAttribute("listAnswers") AnswerListEntity listAnswers) throws SQLException {
 		String model = null;
-		String questionId = request.getParameter("macauhoi");
+		String questionId = request.getParameter("questionId");
 		String categoryId = request.getParameter("categoryId");
-		String contentQuestion = request.getParameter("noidungcauhoi");
+		String contentQuestion = request.getParameter("contentQuestion");
 		boolean type = Boolean.parseBoolean(request.getParameter("type"));
 		boolean status = Boolean.parseBoolean(request.getParameter("status"));
 		QuestionEntity questionEntity = new QuestionEntity(questionId, "A00001", categoryId, contentQuestion, type,
 				status);
-
 		List<AnswerEntity> answerList = new ArrayList<AnswerEntity>();
 		for (int index = 0; index < listAnswers.getAnswerEntitys().size(); index++) {
 			AnswerEntity answerEntity = new AnswerEntity();
@@ -90,6 +89,35 @@ public class QuestionManagementController {
 		}
 
 		if (questionDAO.AddQuestion(questionEntity) && answerDAO.AddAnswers(answerList)) {
+			model = "redirect:get-all-question";
+		} else {
+			model = "error";
+		}
+		return model;
+	}
+	
+	@RequestMapping(value = "updateQuestion", method = RequestMethod.GET)
+	public String UpdateQuestion(@ModelAttribute("questionId") String questionId, ModelMap modelmap) {
+		QuestionEntity questionEntity = questionDAO.GetQuestionByQuestionId(questionId);
+		List<AnswerEntity> listAnswers = answerDAO.GetAnswersByAnswersId(questionId);
+		List<CategoryEntity> listCategoriesEntity = categoryDAO.GetAllCategories();
+		modelmap.addAttribute("questionEntity", questionEntity);
+		modelmap.addAttribute("listAnswers", listAnswers);
+		modelmap.addAttribute("listCategoriesEntity", listCategoriesEntity);
+		return "update-question";
+	}
+	
+	@RequestMapping(value = "update-question-succ", method = RequestMethod.POST)
+	public String updateQuestionSucc(HttpServletRequest request) {
+		String model = null;
+		String questionId = request.getParameter("questionId");
+		String categoryId = request.getParameter("categoryId");
+		String contentQuestion = request.getParameter("contentQuestion");
+		boolean type = Boolean.parseBoolean(request.getParameter("type"));
+		boolean status = Boolean.parseBoolean(request.getParameter("status"));
+		QuestionEntity questionEntity = new QuestionEntity(questionId, "A00001", categoryId, contentQuestion, type,
+				status);
+		if (questionDAO.UpdateQuestion(questionEntity)) {
 			model = "redirect:get-all-question";
 		} else {
 			model = "error";

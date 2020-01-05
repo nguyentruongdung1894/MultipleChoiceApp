@@ -10,4 +10,8 @@ public interface QuestionDAO {
 	public boolean DeleteQuestion(String questionId);
 	
 	public boolean AddQuestion(QuestionEntity questionEntity);
+	
+	public boolean UpdateQuestion(QuestionEntity questionEntity);
+	
+	public QuestionEntity GetQuestionByQuestionId(String questionId);
 }

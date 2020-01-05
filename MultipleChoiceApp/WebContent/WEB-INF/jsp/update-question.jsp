@@ -47,15 +47,16 @@
 		</div>
 		<div class="row">
 			<div class="col-sm-12">
-				<form:form action="add-question-succ" method="post"
+				<form:form action="update-question-succ" method="post"
 					modelAttribute="listAnswers">
 					<div class="row">
 						<div class="col-sm-6">
 							<ul class="form-style-1">
 								<li><label>Quest ID</label> <input type="text"
-									name="questionId" class="field-divided" placeholder="Quest ID" /></li>
+									name="questionId" class="field-divided" placeholder="Quest ID"
+									value="${questionEntity.questionId}" /></li>
 								<li><label>Text</label> <textarea name="contentQuestion"
-										class="field-long field-textarea"></textarea></li>
+										class="field-long field-textarea">${questionEntity.contentQuestion}</textarea></li>
 								<li><label>Category</label> <select name="categoryId"
 									class="field-select">
 										<c:forEach items="${listCategoriesEntity}"
@@ -73,41 +74,47 @@
 										<option value="true">Display</option>
 										<option value="false">Hide</option>
 								</select></li>
-								<li style="display: inline-block; float: left; margin-right: 20px;"><input type="submit" value="Add" /></li>
-								<li style="display: inline-block; float: left;"><input type=button value="Cancel" onclick="history.go(-1)"/></li>
+								<li style="display: inline-block; float: left; margin-right: 20px;"><input
+									type="submit" value="Update" /></li>
+								<li style="display: inline-block; float: left; margin-right: 20px; background-color: #4b99ad; padding: 8px">
+									<a href="deleteQuestion?questionId=${questionEntity.questionId}" style="color: white; text-decoration: none;">Delete</a>
+								</li>
+								<li style="display: inline-block; float: left;"><input type=button value="Cancel"
+									onclick="history.go(-1)" /></li>
 							</ul>
-
 						</div>
 						<div class="col-sm-6">
-							<%
-								for (int index = 0; index < 4; index++) {
-							%>
-							<div class="form-style-1" style="margin-top: 10px; height: 140px">
-								<label>Answers <%=index%></label> <label>Quest ID</label> <input
-									type="text" name="answerEntitys[<%=index%>].answerId" class="field-divided"
-									placeholder="Answer ID" />
-								<div style="width: 100%">
-									<div style="float: left; width: 80%; padding-right: 15px">
-										<textarea name="answerEntitys[<%=index%>].contentAnswer"
-											class="field-long field-textarea-left"></textarea>
-									</div>
-									<div style="float: left; width: 20%">
-										<div style="height: 25px">
-											<label class="container">True <input type="radio"
-												value="true" checked="checked" name="answerEntitys[<%=index%>].correctAnswer">
-											</label>
+							<c:forEach items="${listAnswers}" var="answerEntitys"
+								varStatus="status">
+								<div class="form-style-1"
+									style="margin-top: 10px; height: 140px">
+									<label>Answers ${status.count}</label> <label>Quest ID</label>
+									<input type="text"
+										name="answerEntitys[${status.index}].answerId"
+										value="${answerEntitys.answerId}" class="field-divided"
+										placeholder="Answer ID" />
+									<div style="width: 100%">
+										<div style="float: left; width: 80%; padding-right: 15px">
+											<textarea name="answerEntitys[${status.index}].contentAnswer"
+												class="field-long field-textarea-left">${answerEntitys.contentAnswer}</textarea>
 										</div>
-										<div style="height: 25px">
-											<label class="container">False <input type="radio"
-												value="false" checked="checked" name="answerEntitys[<%=index%>].correctAnswer">
-											</label>
+										<div style="float: left; width: 20%">
+											<div style="height: 25px">
+												<label class="container">True <input type="radio"
+													value="true" checked="checked"
+													name="answerEntitys[${status.index}].correctAnswer">
+												</label>
+											</div>
+											<div style="height: 25px">
+												<label class="container">False <input type="radio"
+													value="false" checked="checked"
+													name="answerEntitys[${status.index}].correctAnswer">
+												</label>
+											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-							<%
-								}
-							%>
+							</c:forEach>
 						</div>
 					</div>
 				</form:form>

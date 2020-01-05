@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import usolv.com.vn.DAO.CategoryDAO;
-import usolv.com.vn.DTO.CategoriesIdDTO;
 import usolv.com.vn.connectDB.SQLConnection;
 import usolv.com.vn.entitys.CategoryEntity;
 
@@ -33,7 +32,7 @@ public class CategoryDAOImpl implements CategoryDAO {
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
-		}finally {
+		} finally {
 			try {
 				rs.close();
 				pstm.close();
@@ -78,12 +77,6 @@ public class CategoryDAOImpl implements CategoryDAO {
 			}
 		}
 		return listCategories;
-	}
-
-	@Override
-	public List<CategoriesIdDTO> GetAllIdCategories() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

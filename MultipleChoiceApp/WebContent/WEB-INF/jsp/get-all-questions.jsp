@@ -10,7 +10,7 @@
 	href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css'>
 <link href="<c:url value="/resources/css/styleQuestion.css" />"
 	rel="stylesheet">
-<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+<script src=<c:url value="/resources/js/fontawesome.js" />></script>
 </head>
 <body>
 	<!-- Header -->
@@ -28,7 +28,8 @@
 		</div>
 		<div class="navbarNew container">
 			<ul>
-				<li><a class="" href="add-question" style="padding: 5px 15px">Add new</a></li>
+				<li><a class="" href="add-question" style="padding: 5px 15px">Add
+						new</a></li>
 			</ul>
 		</div>
 		<div class="container" id="jar" style="margin-bottom: 20px">
@@ -51,8 +52,9 @@
 							<td>${listQuestionsDTO.contentQuestion}</td>
 							<td style="text-align: center">${listQuestionsDTO.categoryName}</td>
 							<td style="text-align: center">${listQuestionsDTO.type}</td>
-							<td style="text-align: center"><i class='fas fa-pen'
-								style='font-size: 15px; color: #0665c0'></i></td>
+							<td style="text-align: center"><a
+								href="updateQuestion?questionId=${listQuestionsDTO.questionId}"><i
+									class='fas fa-pen' style='font-size: 15px; color: #0665c0'></i></a></td>
 							<td style="text-align: center"><a
 								href="deleteQuestion?questionId=${listQuestionsDTO.questionId}"><i
 									class='far fa-trash-alt'

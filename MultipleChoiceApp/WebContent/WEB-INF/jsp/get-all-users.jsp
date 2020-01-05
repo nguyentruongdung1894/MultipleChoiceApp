@@ -10,7 +10,7 @@
 	href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css'>
 <link href="<c:url value="/resources/css/styleQuestion.css" />"
 	rel="stylesheet">
-<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+<script src=<c:url value="/resources/js/fontawesome.js" />></script>
 </head>
 <body>
 	<!-- Header -->

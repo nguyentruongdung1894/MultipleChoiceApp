@@ -1,1 +1,2 @@
 Khi them dialog ko nhan ID ma xoa theo thu tu
+insert cau hoi design chua on

@@ -54,19 +54,19 @@ public class QuestionDAOImpl implements QuestionDAO {
 	@Override
 	public boolean DeleteQuestion(String questionId) {
 		Connection conn = SQLConnection.getConnectionSqlServer();
-		PreparedStatement pst = null;
+		PreparedStatement pstm = null;
 		String sql = "UPDATE TB_Question SET Status = '0' WHERE QuestionId = ?";
 		try {
-			pst = conn.prepareStatement(sql);
-			pst.setString(1, questionId);
-			pst.executeUpdate();
+			pstm = conn.prepareStatement(sql);
+			pstm.setString(1, questionId);
+			pstm.executeUpdate();
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 			return false;
 		} finally {
 			try {
-				pst.close();
+				pstm.close();
 				conn.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -100,7 +100,87 @@ public class QuestionDAOImpl implements QuestionDAO {
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
+		} finally {
+			try {
+				pstm.close();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return check;
 	}
+
+	@Override
+	public boolean UpdateQuestion(QuestionEntity questionEntity) {
+		Connection conn = SQLConnection.getConnectionSqlServer();
+		PreparedStatement pstm = null;
+		String sql = "update TB_Question set AdminId = ?, CategoryId = ?, ContentQuestion = ?, Type= ?, Status =? where  QuestionId = ?";
+		try {
+			pstm = conn.prepareStatement(sql);
+			pstm.setString(1, questionEntity.getAdminId());
+			pstm.setString(2, questionEntity.getCategoryId());
+			pstm.setString(3, questionEntity.getContentQuestion());
+			pstm.setBoolean(4, questionEntity.isType());
+			pstm.setBoolean(5, questionEntity.isStatus());
+			pstm.setString(6, questionEntity.getQuestionId());
+			pstm.executeUpdate();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return false;
+		} finally {
+			try {
+				pstm.close();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return true;
+	}
+
+	@Override
+	public QuestionEntity GetQuestionByQuestionId(String questionId) {
+		Connection conn = null;
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM TB_Question WHERE Status = 1 AND QuestionId = ?";
+		QuestionEntity questionEntity = new QuestionEntity();
+		try {
+			conn = SQLConnection.getConnectionSqlServer();
+			pstm = conn.prepareStatement(sql);
+			pstm.setString(1, questionId);
+			rs = pstm.executeQuery();
+			while (rs.next()) {
+				questionEntity.setQuestionId(rs.getString("QuestionId"));
+				questionEntity.setAdminId(rs.getString("AdminId"));
+				questionEntity.setCategoryId(rs.getString("CategoryId"));
+				questionEntity.setContentQuestion(rs.getString("ContentQuestion"));
+				questionEntity.setType(rs.getBoolean("Type"));
+				questionEntity.setStatus(rs.getBoolean("Status"));
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}finally {
+			try {
+				rs.close();
+				pstm.close();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return questionEntity;
+	}
+
+//	public static void main(String[] args) {
+//		QuestionDAOImpl qI = new QuestionDAOImpl();
+//		QuestionEntity questionEntity = qI.GetQuestionByQuestionId("Q00001");
+//		System.out.println(questionEntity.getContentQuestion());
+//	}
 }
