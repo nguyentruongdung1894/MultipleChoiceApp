@@ -25,4 +25,5 @@ public class CategoryManagermentController {
 		model.addAttribute("listCategoriesEntity", listCategoriesEntity);
 		return "get-all-category";
 	}
+	
 }

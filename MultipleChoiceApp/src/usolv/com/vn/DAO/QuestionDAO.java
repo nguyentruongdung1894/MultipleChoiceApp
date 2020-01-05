@@ -8,4 +8,6 @@ public interface QuestionDAO {
 	public List<QuestionEntity> GetAllQuestions();
 
 	public boolean DeleteQuestion(String questionId);
+	
+	public boolean AddQuestion(QuestionEntity questionEntity);
 }

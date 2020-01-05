@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import usolv.com.vn.DAO.CategoryDAO;
+import usolv.com.vn.DTO.CategoriesIdDTO;
 import usolv.com.vn.connectDB.SQLConnection;
 import usolv.com.vn.entitys.CategoryEntity;
 
@@ -78,12 +79,11 @@ public class CategoryDAOImpl implements CategoryDAO {
 		}
 		return listCategories;
 	}
-//	
-//	public static void main(String[] args) {
-//		CategoryDAOImpl c = new CategoryDAOImpl();
-//		List<CategoryEntity> listCategories = c.GetAllCategories();
-//		for (CategoryEntity categoryEntity : listCategories) {
-//			System.out.println(categoryEntity.getCategoryId());
-//		}
-//	}
+
+	@Override
+	public List<CategoriesIdDTO> GetAllIdCategories() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

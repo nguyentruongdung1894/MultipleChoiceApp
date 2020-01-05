@@ -28,7 +28,7 @@
 		</div>
 		<div class="navbarNew container">
 			<ul>
-				<li><a class="" href="" style="padding: 5px 15px">Add new</a></li>
+				<li><a class="" href="add-question" style="padding: 5px 15px">Add new</a></li>
 			</ul>
 		</div>
 		<div class="container" id="jar" style="margin-bottom: 20px">

@@ -75,9 +75,32 @@ public class QuestionDAOImpl implements QuestionDAO {
 		}
 		return true;
 	}
-//	public static void main(String[] args) {
-//		QuestionDAOImpl n = new QuestionDAOImpl();
-//		boolean cehc = n.DeleteQuestion("Q00001");
-//		System.out.println(cehc);
-//	}
+
+	@Override
+	public boolean AddQuestion(QuestionEntity questionEntity) {
+		boolean check = false;
+		Connection conn = null;
+		PreparedStatement pstm = null;
+		String query = "insert into TB_Question values(?,?,?,?,?,?)";
+		try {
+			conn = SQLConnection.getConnectionSqlServer();
+			pstm = conn.prepareStatement(query);
+			pstm.setString(1, questionEntity.getQuestionId());
+			pstm.setString(2, questionEntity.getAdminId());
+			pstm.setString(3, questionEntity.getCategoryId());
+			pstm.setString(4, questionEntity.getContentQuestion());
+			pstm.setBoolean(5, questionEntity.isType());
+			pstm.setBoolean(6, questionEntity.isStatus());
+			int count = pstm.executeUpdate();
+			if (count != 0) {
+				check = true;
+			} else {
+				check = false;
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return check;
+	}
 }
