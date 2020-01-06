@@ -6,6 +6,9 @@
     </title>
     <link href="style.css" rel="stylesheet">
     <script src="sketch.js"></script>
+    <script language="JavaScript" type="text/javascript"> 
+var t = setTimeout("document.myform.submit();",10000); //2 seconds measured in miliseconds
+</script>
   </head>
   <body>
     <div class="countdown">
@@ -19,5 +22,7 @@
         <div class="text">SECONDS</div>
       </div>
     </div>
+    <form name="myform" action="nextpage.html" method="post">
+  </form>
   </body>
 </html>
