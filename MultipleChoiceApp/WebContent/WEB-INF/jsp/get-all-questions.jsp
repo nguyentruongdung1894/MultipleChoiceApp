@@ -55,17 +55,12 @@
 							<td style="text-align: center"><a
 								href="updateQuestion?questionId=${listQuestionsDTO.questionId}"><i
 									class='fas fa-pen' style='font-size: 15px; color: #0665c0'></i></a></td>
-							<td style="text-align: center"><a
-								href="deleteQuestion?questionId=${listQuestionsDTO.questionId}"><i
-									class='far fa-trash-alt'
-									style='font-size: 15px; color: #0665c0'></i></a></td>
-							<!-- <td style="text-align: center">
-								<button
-									onclick="document.getElementById('id01').style.display='block'">
+							<td style="text-align: center">
+								<button onclick="show('${listQuestionsDTO.questionId}')">
 									<i class='far fa-trash-alt'
 										style='font-size: 15px; color: #0665c0'></i>
 								</button>
-							</td> -->
+							</td>
 						</tr>
 						<div id="id01" class="modal">
 							<div class="model-bottom">
@@ -74,15 +69,16 @@
 									<p>Confirm delete</p>
 								</div>
 								<div style="text-align: center; width: 100%; height: 100px">
-									<p>Do you want to delete this question?</p>
+									<p>
+										Do you want to delete this question? <span id="idQuestion"></span>
+										<input type="hidden" id="inputQ">
+									</p>
 								</div>
 
 								<div style="text-align: center; width: 100%">
 									<div class="" style="float: left; width: 50%">
 										<div style="background: #78b7f3; margin: 0 auto; width: 100px">
-											<a
-												href="deleteQuestion?questionId=${listQuestionsDTO.questionId}"
-												style="color: white">OK</a>
+											<a onclick="del()" href="#" style="color: white">OK</a>
 										</div>
 									</div>
 									<div class="" style="float: left; width: 50%">
@@ -98,12 +94,16 @@
 				</tbody>
 			</table>
 		</div>
-		<script>
-			var modal = document.getElementById('id01');
-			window.onclick = function(event) {
-				if (event.target == modal) {
-					modal.style.display = "none";
-				}
+		<script type="text/javascript">
+			function show(id) {
+				document.getElementById('id01').style.display = "block";
+				document.getElementById("idQuestion").innerHTML = id;
+				document.getElementById("inputQ").value = id;
+
+			}
+			function del() {
+				var id = document.getElementById("inputQ").value
+				window.location.href = "deleteQuestion?questionId=" + id;
 			}
 		</script>
 		<nav>
