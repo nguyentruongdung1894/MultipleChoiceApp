@@ -1,6 +1,6 @@
-create database MultipleChoiceApp
+create database MultipleChoiceAppUpdate
 go
-use MultipleChoiceApp
+use MultipleChoiceAppUpdate
 
 go
 create table TB_Category(
@@ -19,7 +19,7 @@ create table TB_Question(
 )
 go
 create table TB_Answer(
-	AnswerId varchar(25) not null,
+	AnswerId INT IDENTITY(1,1) not null,
 	QuestionId varchar(25) not null,
 	ContentAnswer text,
 	CorrectAnswer bit,
@@ -37,7 +37,7 @@ create table TB_Admin(
 )
 go
 create table TB_Exam(
-	ExamId varchar(25) primary key not null,
+	ExamId INT IDENTITY(1,1) primary key not null,
 	FullName varchar(255),
 	Phone varchar(25),
 	Email nvarchar(255),
@@ -46,9 +46,10 @@ create table TB_Exam(
 	Status bit
 )
 create table TB_ExamResult(
-	ExamResultId varchar(25) primary key not null,
-	ExamId varchar(25) not null,
-	AnswerId varchar(25) not null,
+	ExamResultId INT IDENTITY(1,1) primary key not null,
+	ExamId INT not null,
+	AnswerId INT not null,
+	QuestionId varchar(25)
 )
 
 go

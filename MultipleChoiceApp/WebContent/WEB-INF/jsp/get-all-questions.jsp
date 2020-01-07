@@ -96,10 +96,12 @@
 		</div>
 		<script type="text/javascript">
 			function show(id) {
+				//show id01
 				document.getElementById('id01').style.display = "block";
+				//xet gia tri cho the span khi click vao show(id)
 				document.getElementById("idQuestion").innerHTML = id;
+				//xet gia tri cho input = hide bang id
 				document.getElementById("inputQ").value = id;
-
 			}
 			function del() {
 				var id = document.getElementById("inputQ").value

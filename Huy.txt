@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title> </title>
+  <style type="text/css">
+  .form {
+  
+   
+    margin: auto;
+}
+.top-left-top {
+    display: flex;
+    background: tomato;
+    border-bottom: 4px solid;
+}
+span.ietnam {
+    display: flex;
+    align-items: flex-end;
+    font-size: 22px;
+    margin-left: 2px;
+    padding-right: 10px;
+}
+
+span.v {
+    font-size: 48px;
+    color: #FFF;
+    position: absolute;
+    margin-left: 90px;
+    margin-top: -11px;
+    font-weight: bold;
+}
+
+.top-left div {
+    margin-top: -12px;
+    font-size: 27px;
+    font-weight: bold;
+    color: tomato;
+}
+
+div.usol {
+    display: block;
+    font-size: 28px;
+    color: #FFF;
+    border-bottom: 34px solid black;
+    border-right: 21px solid transparent;
+    height: 0;
+    width: 75px;
+    padding-left: 15px;
+}
+.top {
+    display: flex;
+    justify-content: space-between;
+}
+.usol span {
+    font-size: 25px;
+    display: block;
+    padding-top: 13px;
+    padding-left: 21px;
+}
+.change {
+    font-size: 12px;
+    color: tomato;
+    margin-left: 18px;
+    font-weight: bold;
+}
+span.ietnam span {
+    padding-top: 8px!important;
+    display: block;
+    height: 20px;
+}
+.top-right {
+    margin-right: 20px;
+}
+
+.a {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 40px;
+}
+.mid {
+    width: 80%;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    border: 1px solid;
+    background: tomato;
+    font-weight: bold;
+}
+
+.bot {
+    width: 80%;
+    margin: auto;
+    margin-top: 35px;
+}
+.dapan div {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.nut {
+    display: flex;
+   justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.nut button {
+    cursor: pointer;
+    padding: 10px 33px;
+    background: tomato;
+    border: 1px solid;
+    margin: 0 85px;
+    font-weight: bold;
+}
+.cuoi {
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: tomato;
+    font-weight: bold;
+    border: 1px solid;
+}
+.a {
+    margin-right: 20px;
+}
+.question {
+    margin-left: 100px;
+    margin-bottom: 32px;
+}
+.dapan div {
+    margin: 34px 0;
+}
+.dapan div span {
+    margin: 0 96px;
+}
+form{height: 284px;   margin-bottom: 150px;}
+  </style>
+
+</head>
+<body>
+  <div class="form">
+    <div class="top">
+      <div class="top-left">
+        <img src="40.png">
+        <div>aaaaaaaaaa</div>
+      </div>
+      <div class="top-right">
+        <div class="tren">
+          <div id="date">Date : 2019/12/31</div>
+          <div id="time"><span id="time"> 30:00</span></div>
+        </div>
+        
+      </div>
+
+    </div>
+    <div class="a">Hi Nguyen Van A</div>
+    <div class="mid">Theary test : JAVA (20 question)</div>
+    <form>
+      <div class="bot">
+      <div class="question">
+        <span>Cau1:</span>
+        <span>cau hoi so 1 ........</span>
+      </div>
+      <div class="dapan">
+        <div>
+          <span><input type="radio" name="" value="am">A. am</span>
+          <span><input type="radio" name="" value="am">B. am</span>
+        </div>
+        <div>
+          <span><input type="radio" name="" value="am">C. am</span>
+          <span><input type="radio" name="" value="am">D. am</span>
+        </div>
+      </div>
+      <div class="nut">
+        <button>Prev</button>
+        <button>Next</button>
+      </div>
+    </div>
+    </form>
+    <div class="cuoi">oki nhe</div>
+  </div>
+  <script type="text/javascript">
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1; //January is 0!
+    var yyyy = today.getFullYear();
+    if(dd<10) {
+      dd='0'+dd
+    } 
+
+    if(mm<10) {
+      mm='0'+mm
+    } 
+
+    today = dd+'/'+mm+'/'+yyyy;
+    document.getElementById("date").innerHTML ="Date : "+ today;
+    
+    function startTimer(duration, display) {
+        var timer = duration, minutes, seconds;
+        setInterval(function () {
+            minutes = parseInt(timer / 60, 10)
+            seconds = parseInt(timer % 60, 10);
+
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            display.textContent ="Time "+ minutes + ":" + seconds;
+
+            if (--timer < 0) {
+                timer = duration;
+            }
+        }, 1000);
+    }
+
+    window.onload = function () {
+        var fiveMinutes = 60 * 30,
+            display = document.querySelector('#time');
+        startTimer(fiveMinutes, display);
+    };
+  </script>
+</body>
+</html>
