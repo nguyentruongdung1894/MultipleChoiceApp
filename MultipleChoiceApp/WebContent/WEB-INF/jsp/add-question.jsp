@@ -53,6 +53,43 @@
 			int sumQ = listQuestions.size() + 1;
 		%>
 		<div class="row">
+			<div class="col-sm-10"></div>
+			<div class="col-sm-2">
+				<a onclick="myFunction()">Try it</a>
+			</div>
+		</div>
+		<script>
+			var counter = 1;
+			function count() {
+				if (counter < 4) {
+					counter++
+				} else {
+					counter = 1;
+				}
+				return counter;
+			}
+			function myFunction() {
+				var x = document.getElementById(count());
+				x.style.display = "block";
+			}
+			function hide1() {
+				var x = document.getElementById("1");
+				x.style.display = "none";
+			}
+			function hide2() {
+				var x = document.getElementById("2");
+				x.style.display = "none";
+			}
+			function hide3() {
+				var x = document.getElementById("3");
+				x.style.display = "none";
+			}
+			function hide4() {
+				var x = document.getElementById("4");
+				x.style.display = "none";
+			}
+		</script>
+		<div class="row">
 			<div class="col-sm-12">
 				<form:form action="add-question-succ" method="post"
 					modelAttribute="listAnswers">
@@ -87,38 +124,100 @@
 								<li style="display: inline-block; float: left;"><input
 									type=button value="Cancel" onclick="history.go(-1)" /></li>
 							</ul>
-
 						</div>
-						<div class="col-sm-6">
-							<%
-								for (int index = 0; index < 4; index++) {
-							%>
-							<div class="form-style-1" style="margin-top: 10px; height: 140px">
-								<label>Answers <%=index + 1%></label>
+						<div class="col-sm-5">
+							<div class="form-style-1" style="margin-top: 10px; height: 140px"
+								id="1">
+								<label>Answers 1</label>
 								<div style="width: 100%">
 									<div style="float: left; width: 80%; padding-right: 15px">
-										<textarea name="answerEntitys[<%=index%>].contentAnswer"
+										<textarea name="answerEntitys[0].contentAnswer"
 											class="field-long field-textarea-left"></textarea>
 									</div>
 									<div style="float: left; width: 20%">
 										<div style="height: 25px">
 											<label class="container">True <input type="radio"
-												value="true" checked="checked"
-												name="answerEntitys[<%=index%>].correctAnswer">
+												value="true" name="answerEntitys[0].correctAnswer">
 											</label>
 										</div>
 										<div style="height: 25px">
 											<label class="container">False <input type="radio"
-												value="false" checked="checked"
-												name="answerEntitys[<%=index%>].correctAnswer">
+												value="false" name="answerEntitys[0].correctAnswer">
 											</label>
 										</div>
 									</div>
 								</div>
+								<a onclick="hide1()" id="">Try it</a>
 							</div>
-							<%
-								}
-							%>
+							<div class="form-style-1" style="margin-top: 10px; height: 140px"
+								id="2">
+								<label>Answers 2</label>
+								<div style="width: 100%">
+									<div style="float: left; width: 80%; padding-right: 15px">
+										<textarea name="answerEntitys[1].contentAnswer"
+											class="field-long field-textarea-left"></textarea>
+									</div>
+									<div style="float: left; width: 20%">
+										<div style="height: 25px">
+											<label class="container">True <input type="radio"
+												value="true" name="answerEntitys[1].correctAnswer">
+											</label>
+										</div>
+										<div style="height: 25px">
+											<label class="container">False <input type="radio"
+												value="false" name="answerEntitys[1].correctAnswer">
+											</label>
+										</div>
+									</div>
+								</div>
+								<a onclick="hide2()" id="">Try it</a>
+							</div>
+							<div class="form-style-1" style="margin-top: 10px; height: 140px"
+								id="3">
+								<label>Answers 3</label>
+								<div style="width: 100%">
+									<div style="float: left; width: 80%; padding-right: 15px">
+										<textarea name="answerEntitys[2].contentAnswer"
+											class="field-long field-textarea-left"></textarea>
+									</div>
+									<div style="float: left; width: 20%">
+										<div style="height: 25px">
+											<label class="container">True <input type="radio"
+												value="true" name="answerEntitys[2].correctAnswer">
+											</label>
+										</div>
+										<div style="height: 25px">
+											<label class="container">False <input type="radio"
+												value="false" name="answerEntitys[2].correctAnswer">
+											</label>
+										</div>
+									</div>
+								</div>
+								<a onclick="hide3()" id="">Try it</a>
+							</div>
+							<div class="form-style-1" style="margin-top: 10px; height: 140px"
+								id="4">
+								<label>Answers 4</label>
+								<div style="width: 100%">
+									<div style="float: left; width: 80%; padding-right: 15px">
+										<textarea name="answerEntitys[3].contentAnswer"
+											class="field-long field-textarea-left"></textarea>
+									</div>
+									<div style="float: left; width: 20%">
+										<div style="height: 25px">
+											<label class="container">True <input type="radio"
+												value="true" name="answerEntitys[3].correctAnswer">
+											</label>
+										</div>
+										<div style="height: 25px">
+											<label class="container">False <input type="radio"
+												value="false" name="answerEntitys[3].correctAnswer">
+											</label>
+										</div>
+									</div>
+								</div>
+								<a onclick="hide4()" id="">Try it</a>
+							</div>
 						</div>
 					</div>
 				</form:form>

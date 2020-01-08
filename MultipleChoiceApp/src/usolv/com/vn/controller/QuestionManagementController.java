@@ -110,11 +110,13 @@ public class QuestionManagementController {
 	@RequestMapping(value = "update-question-succ", method = RequestMethod.POST)
 	public String updateQuestionSucc(HttpServletRequest request) {
 		String model = null;
+		int questionId = Integer.parseInt(request.getParameter("questionId"));
 		String categoryId = request.getParameter("categoryId");
 		String contentQuestion = request.getParameter("contentQuestion");
 		boolean type = Boolean.parseBoolean(request.getParameter("type"));
 		boolean status = Boolean.parseBoolean(request.getParameter("status"));
-		QuestionEntity questionEntity = new QuestionEntity("A00001", categoryId, contentQuestion, type, status);
+		QuestionEntity questionEntity = new QuestionEntity(questionId, "A00001", categoryId, contentQuestion, type,
+				status);
 		if (questionDAO.UpdateQuestion(questionEntity)) {
 			model = "redirect:get-all-question";
 		} else {

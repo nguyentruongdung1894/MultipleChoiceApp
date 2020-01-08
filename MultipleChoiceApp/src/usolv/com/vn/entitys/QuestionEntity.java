@@ -12,8 +12,18 @@ public class QuestionEntity {
 		super();
 	}
 
-	public QuestionEntity(String adminId, String categoryId, String contentQuestion, boolean type,
+	public QuestionEntity(int questionId, String adminId, String categoryId, String contentQuestion, boolean type,
 			boolean status) {
+		super();
+		this.questionId = questionId;
+		this.adminId = adminId;
+		this.categoryId = categoryId;
+		this.contentQuestion = contentQuestion;
+		this.type = type;
+		this.status = status;
+	}
+
+	public QuestionEntity(String adminId, String categoryId, String contentQuestion, boolean type, boolean status) {
 		super();
 		this.adminId = adminId;
 		this.categoryId = categoryId;

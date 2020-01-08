@@ -111,14 +111,6 @@ public class QuestionDAOImpl implements QuestionDAO {
 		return check;
 	}
 
-//	public static void main(String[] args) {
-//		QuestionDAOImpl fd = new QuestionDAOImpl();
-//		QuestionEntity questionEntity = new QuestionEntity("A00001", "C00005",
-//				"Jan 08, 2020 8:38:51 PM org.apache.catalina.core.StandardWrapperValve invoke", true, true);
-//		boolean check = fd.AddQuestion(questionEntity);
-//		System.out.println(check);
-//	}
-
 	@Override
 	public boolean UpdateQuestion(QuestionEntity questionEntity) {
 		Connection conn = SQLConnection.getConnectionSqlServer();
@@ -147,6 +139,14 @@ public class QuestionDAOImpl implements QuestionDAO {
 			}
 		}
 		return true;
+	}
+
+	public static void main(String[] args) {
+		QuestionDAOImpl fd = new QuestionDAOImpl();
+		QuestionEntity questionEntity = new QuestionEntity(1, "A00001", "C00005", "What is the size of 1 Char?", false,
+				true);
+		boolean check = fd.UpdateQuestion(questionEntity);
+		System.out.println(check);
 	}
 
 	@Override
