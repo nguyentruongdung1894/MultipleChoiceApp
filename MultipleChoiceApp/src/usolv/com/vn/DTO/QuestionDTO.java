@@ -11,7 +11,7 @@ import usolv.com.vn.entitys.QuestionEntity;
 
 public class QuestionDTO {
 	private int id;
-	private String questionId;
+	private int questionId;
 	private String contentQuestion;
 	private String categoryName;
 	private String type;
@@ -20,7 +20,7 @@ public class QuestionDTO {
 		super();
 	}
 
-	public QuestionDTO(int id, String questionId, String contentQuestion, String categoryName, String type) {
+	public QuestionDTO(int id, int questionId, String contentQuestion, String categoryName, String type) {
 		super();
 		this.id = id;
 		this.questionId = questionId;
@@ -37,11 +37,11 @@ public class QuestionDTO {
 		this.id = id;
 	}
 
-	public String getQuestionId() {
+	public int getQuestionId() {
 		return questionId;
 	}
 
-	public void setQuestionId(String questionId) {
+	public void setQuestionId(int questionId) {
 		this.questionId = questionId;
 	}
 

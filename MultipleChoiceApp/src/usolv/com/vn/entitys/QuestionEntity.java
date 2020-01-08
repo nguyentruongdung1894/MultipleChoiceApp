@@ -1,7 +1,7 @@
 package usolv.com.vn.entitys;
 
 public class QuestionEntity {
-	private String questionId;
+	private int questionId;
 	private String adminId;
 	private String categoryId;
 	private String contentQuestion;
@@ -12,10 +12,9 @@ public class QuestionEntity {
 		super();
 	}
 
-	public QuestionEntity(String questionId, String adminId, String categoryId, String contentQuestion, boolean type,
+	public QuestionEntity(String adminId, String categoryId, String contentQuestion, boolean type,
 			boolean status) {
 		super();
-		this.questionId = questionId;
 		this.adminId = adminId;
 		this.categoryId = categoryId;
 		this.contentQuestion = contentQuestion;
@@ -23,11 +22,11 @@ public class QuestionEntity {
 		this.status = status;
 	}
 
-	public String getQuestionId() {
+	public int getQuestionId() {
 		return questionId;
 	}
 
-	public void setQuestionId(String questionId) {
+	public void setQuestionId(int questionId) {
 		this.questionId = questionId;
 	}
 

@@ -27,7 +27,7 @@ public class QuestionDAOImpl implements QuestionDAO {
 			rs = stm.executeQuery(sql);
 			while (rs.next()) {
 				QuestionEntity questions = new QuestionEntity();
-				questions.setQuestionId(rs.getString("QuestionId"));
+				questions.setQuestionId(rs.getInt("QuestionId"));
 				questions.setAdminId(rs.getString("AdminId"));
 				questions.setCategoryId(rs.getString("CategoryId"));
 				questions.setContentQuestion(rs.getString("ContentQuestion"));
@@ -52,13 +52,13 @@ public class QuestionDAOImpl implements QuestionDAO {
 	}
 
 	@Override
-	public boolean DeleteQuestion(String questionId) {
+	public boolean DeleteQuestion(int questionId) {
 		Connection conn = SQLConnection.getConnectionSqlServer();
 		PreparedStatement pstm = null;
 		String sql = "UPDATE TB_Question SET Status = '0' WHERE QuestionId = ?";
 		try {
 			pstm = conn.prepareStatement(sql);
-			pstm.setString(1, questionId);
+			pstm.setInt(1, questionId);
 			pstm.executeUpdate();
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -81,16 +81,15 @@ public class QuestionDAOImpl implements QuestionDAO {
 		boolean check = false;
 		Connection conn = null;
 		PreparedStatement pstm = null;
-		String query = "insert into TB_Question values(?,?,?,?,?,?)";
+		String query = "insert into TB_Question values(?,?,?,?,?)";
 		try {
 			conn = SQLConnection.getConnectionSqlServer();
 			pstm = conn.prepareStatement(query);
-			pstm.setString(1, questionEntity.getQuestionId());
-			pstm.setString(2, questionEntity.getAdminId());
-			pstm.setString(3, questionEntity.getCategoryId());
-			pstm.setString(4, questionEntity.getContentQuestion());
-			pstm.setBoolean(5, questionEntity.isType());
-			pstm.setBoolean(6, questionEntity.isStatus());
+			pstm.setString(1, questionEntity.getAdminId());
+			pstm.setString(2, questionEntity.getCategoryId());
+			pstm.setString(3, questionEntity.getContentQuestion());
+			pstm.setBoolean(4, questionEntity.isType());
+			pstm.setBoolean(5, questionEntity.isStatus());
 			int count = pstm.executeUpdate();
 			if (count != 0) {
 				check = true;
@@ -112,6 +111,14 @@ public class QuestionDAOImpl implements QuestionDAO {
 		return check;
 	}
 
+//	public static void main(String[] args) {
+//		QuestionDAOImpl fd = new QuestionDAOImpl();
+//		QuestionEntity questionEntity = new QuestionEntity("A00001", "C00005",
+//				"Jan 08, 2020 8:38:51 PM org.apache.catalina.core.StandardWrapperValve invoke", true, true);
+//		boolean check = fd.AddQuestion(questionEntity);
+//		System.out.println(check);
+//	}
+
 	@Override
 	public boolean UpdateQuestion(QuestionEntity questionEntity) {
 		Connection conn = SQLConnection.getConnectionSqlServer();
@@ -124,7 +131,7 @@ public class QuestionDAOImpl implements QuestionDAO {
 			pstm.setString(3, questionEntity.getContentQuestion());
 			pstm.setBoolean(4, questionEntity.isType());
 			pstm.setBoolean(5, questionEntity.isStatus());
-			pstm.setString(6, questionEntity.getQuestionId());
+			pstm.setInt(6, questionEntity.getQuestionId());
 			pstm.executeUpdate();
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -143,7 +150,7 @@ public class QuestionDAOImpl implements QuestionDAO {
 	}
 
 	@Override
-	public QuestionEntity GetQuestionByQuestionId(String questionId) {
+	public QuestionEntity GetQuestionByQuestionId(int questionId) {
 		Connection conn = null;
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
@@ -152,10 +159,10 @@ public class QuestionDAOImpl implements QuestionDAO {
 		try {
 			conn = SQLConnection.getConnectionSqlServer();
 			pstm = conn.prepareStatement(sql);
-			pstm.setString(1, questionId);
+			pstm.setInt(1, questionId);
 			rs = pstm.executeQuery();
 			while (rs.next()) {
-				questionEntity.setQuestionId(rs.getString("QuestionId"));
+				questionEntity.setQuestionId(rs.getInt("QuestionId"));
 				questionEntity.setAdminId(rs.getString("AdminId"));
 				questionEntity.setCategoryId(rs.getString("CategoryId"));
 				questionEntity.setContentQuestion(rs.getString("ContentQuestion"));
@@ -165,7 +172,7 @@ public class QuestionDAOImpl implements QuestionDAO {
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
-		}finally {
+		} finally {
 			try {
 				rs.close();
 				pstm.close();
@@ -177,10 +184,4 @@ public class QuestionDAOImpl implements QuestionDAO {
 		}
 		return questionEntity;
 	}
-
-//	public static void main(String[] args) {
-//		QuestionDAOImpl qI = new QuestionDAOImpl();
-//		QuestionEntity questionEntity = qI.GetQuestionByQuestionId("Q00001");
-//		System.out.println(questionEntity.getContentQuestion());
-//	}
 }

@@ -7,11 +7,11 @@ import usolv.com.vn.entitys.QuestionEntity;
 public interface QuestionDAO {
 	public List<QuestionEntity> GetAllQuestions();
 
-	public boolean DeleteQuestion(String questionId);
+	public boolean DeleteQuestion(int questionId);
 	
 	public boolean AddQuestion(QuestionEntity questionEntity);
 	
 	public boolean UpdateQuestion(QuestionEntity questionEntity);
 	
-	public QuestionEntity GetQuestionByQuestionId(String questionId);
+	public QuestionEntity GetQuestionByQuestionId(int questionId);
 }

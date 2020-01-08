@@ -24,14 +24,13 @@ public class AnswerDAOImpl implements AnswerDAO {
 		try {
 			conn = SQLConnection.getConnectionSqlServer();
 			// conn.setAutoCommit(false);
-			pstm = conn.prepareStatement("insert into TB_Answer values(?,?,?,?)");
+			pstm = conn.prepareStatement("insert into TB_Answer values(?,?,?)");
 			Iterator<AnswerEntity> it = answerList.iterator();
 			while (it.hasNext()) {
 				AnswerEntity answer = it.next();
-				pstm.setString(1, answer.getAnswerId());
-				pstm.setString(2, answer.getQuestionId());
-				pstm.setString(3, answer.getContentAnswer());
-				pstm.setBoolean(4, answer.isCorrectAnswer());
+				pstm.setInt(1, answer.getQuestionId());
+				pstm.setString(2, answer.getContentAnswer());
+				pstm.setBoolean(3, answer.isCorrectAnswer());
 				pstm.addBatch();
 
 			}
@@ -49,8 +48,23 @@ public class AnswerDAOImpl implements AnswerDAO {
 		return check;
 	}
 
+//	public static void main(String[] args) throws SQLException {
+//		AnswerEntity a = new AnswerEntity(26, "1", false);
+//		AnswerEntity b = new AnswerEntity(26, "1", false);
+//		AnswerEntity c = new AnswerEntity(26, "1", false);
+//		AnswerEntity d = new AnswerEntity(26, "1", false);
+//		List<AnswerEntity> answerList = new ArrayList<AnswerEntity>();
+//		answerList.add(a);
+//		answerList.add(b);
+//		answerList.add(c);
+//		answerList.add(d);
+//		AnswerDAOImpl asd =new AnswerDAOImpl();
+//		boolean check = asd.AddAnswers(answerList);
+//		System.out.println(check);
+//	}
+	
 	@Override
-	public List<AnswerEntity> GetAnswersByAnswersId(String answersId) {
+	public List<AnswerEntity> GetAnswersByAnswersId(int answersId) {
 		Connection conn = null;
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
@@ -59,12 +73,12 @@ public class AnswerDAOImpl implements AnswerDAO {
 		try {
 			conn = SQLConnection.getConnectionSqlServer();
 			pstm = conn.prepareStatement(sql);
-			pstm.setString(1, answersId);
+			pstm.setInt(1, answersId);
 			rs = pstm.executeQuery();
 			while (rs.next()) {
 				AnswerEntity answerEntity = new AnswerEntity();
-				answerEntity.setAnswerId(rs.getString("AnswerId"));
-				answerEntity.setQuestionId(rs.getString("QuestionId"));
+				answerEntity.setAnswerId(rs.getInt("AnswerId"));
+				answerEntity.setQuestionId(rs.getInt("QuestionId"));
 				answerEntity.setContentAnswer(rs.getString("ContentAnswer"));
 				answerEntity.setCorrectAnswer(rs.getBoolean("CorrectAnswer"));
 				answerList.add(answerEntity);

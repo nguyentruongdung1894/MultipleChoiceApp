@@ -46,7 +46,7 @@ public class QuestionManagementController {
 	}
 
 	@RequestMapping("deleteQuestion")
-	public String DeleteQuestion(@ModelAttribute("questionId") String questionId) {
+	public String DeleteQuestion(@ModelAttribute("questionId") int questionId) {
 		String model = null;
 		if (questionDAO.DeleteQuestion(questionId)) {
 			model = "redirect:get-all-question";
@@ -61,6 +61,8 @@ public class QuestionManagementController {
 		QuestionEntity questionEntity = new QuestionEntity();
 		List<AnswerEntity> listAnswers = new ArrayList<AnswerEntity>();
 		List<CategoryEntity> listCategoriesEntity = categoryDAO.GetAllCategories();
+		List<QuestionDTO> listQuestionsDTO = questionDTO.GetAllQuestionsDTO();
+		modelmap.addAttribute("listQuestionsDTO", listQuestionsDTO);
 		modelmap.addAttribute("questionEntity", questionEntity);
 		modelmap.addAttribute("listAnswers", listAnswers);
 		modelmap.addAttribute("listCategoriesEntity", listCategoriesEntity);
@@ -70,24 +72,22 @@ public class QuestionManagementController {
 	@RequestMapping(value = "add-question-succ", method = RequestMethod.POST)
 	public String SaveQuestionSucc(HttpServletRequest request,
 			@ModelAttribute("listAnswers") AnswerListEntity listAnswers) throws SQLException {
+		List<QuestionDTO> listQuestionsDTO = questionDTO.GetAllQuestionsDTO();
 		String model = null;
-		String questionId = request.getParameter("questionId");
+		int questionId = listQuestionsDTO.size() + 1;
 		String categoryId = request.getParameter("categoryId");
 		String contentQuestion = request.getParameter("contentQuestion");
 		boolean type = Boolean.parseBoolean(request.getParameter("type"));
 		boolean status = Boolean.parseBoolean(request.getParameter("status"));
-		QuestionEntity questionEntity = new QuestionEntity(questionId, "A00001", categoryId, contentQuestion, type,
-				status);
+		QuestionEntity questionEntity = new QuestionEntity("A00001", categoryId, contentQuestion, type, status);
 		List<AnswerEntity> answerList = new ArrayList<AnswerEntity>();
 		for (int index = 0; index < listAnswers.getAnswerEntitys().size(); index++) {
 			AnswerEntity answerEntity = new AnswerEntity();
-			answerEntity.setAnswerId(listAnswers.getAnswerEntitys().get(index).getAnswerId());
 			answerEntity.setQuestionId(questionId);
 			answerEntity.setContentAnswer(listAnswers.getAnswerEntitys().get(index).getContentAnswer());
 			answerEntity.setCorrectAnswer(listAnswers.getAnswerEntitys().get(index).isCorrectAnswer());
 			answerList.add(answerEntity);
 		}
-
 		if (questionDAO.AddQuestion(questionEntity) && answerDAO.AddAnswers(answerList)) {
 			model = "redirect:get-all-question";
 		} else {
@@ -95,9 +95,9 @@ public class QuestionManagementController {
 		}
 		return model;
 	}
-	
+
 	@RequestMapping(value = "updateQuestion", method = RequestMethod.GET)
-	public String UpdateQuestion(@ModelAttribute("questionId") String questionId, ModelMap modelmap) {
+	public String UpdateQuestion(@ModelAttribute("questionId") int questionId, ModelMap modelmap) {
 		QuestionEntity questionEntity = questionDAO.GetQuestionByQuestionId(questionId);
 		List<AnswerEntity> listAnswers = answerDAO.GetAnswersByAnswersId(questionId);
 		List<CategoryEntity> listCategoriesEntity = categoryDAO.GetAllCategories();
@@ -106,17 +106,15 @@ public class QuestionManagementController {
 		modelmap.addAttribute("listCategoriesEntity", listCategoriesEntity);
 		return "update-question";
 	}
-	
+
 	@RequestMapping(value = "update-question-succ", method = RequestMethod.POST)
 	public String updateQuestionSucc(HttpServletRequest request) {
 		String model = null;
-		String questionId = request.getParameter("questionId");
 		String categoryId = request.getParameter("categoryId");
 		String contentQuestion = request.getParameter("contentQuestion");
 		boolean type = Boolean.parseBoolean(request.getParameter("type"));
 		boolean status = Boolean.parseBoolean(request.getParameter("status"));
-		QuestionEntity questionEntity = new QuestionEntity(questionId, "A00001", categoryId, contentQuestion, type,
-				status);
+		QuestionEntity questionEntity = new QuestionEntity("A00001", categoryId, contentQuestion, type, status);
 		if (questionDAO.UpdateQuestion(questionEntity)) {
 			model = "redirect:get-all-question";
 		} else {

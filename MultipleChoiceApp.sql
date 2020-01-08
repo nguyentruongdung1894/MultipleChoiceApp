@@ -10,7 +10,7 @@ create table TB_Category(
 )
 go
 create table TB_Question(
-	QuestionId varchar(25) primary key not null,
+	QuestionId INT IDENTITY(1,1) not null primary key,
 	AdminId varchar(25) not null,
 	CategoryId varchar(25) not null,
 	ContentQuestion text,
@@ -20,7 +20,7 @@ create table TB_Question(
 go
 create table TB_Answer(
 	AnswerId INT IDENTITY(1,1) not null,
-	QuestionId varchar(25) not null,
+	QuestionId int not null,
 	ContentAnswer text,
 	CorrectAnswer bit,
 	primary key (AnswerId, QuestionId)
@@ -49,7 +49,7 @@ create table TB_ExamResult(
 	ExamResultId INT IDENTITY(1,1) primary key not null,
 	ExamId INT not null,
 	AnswerId INT not null,
-	QuestionId varchar(25)
+	QuestionId int
 )
 
 go
