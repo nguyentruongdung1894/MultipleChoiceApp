@@ -13,5 +13,5 @@ public interface QuestionDAO {
 	
 	public boolean UpdateQuestion(QuestionEntity questionEntity);
 	
-	public QuestionEntity GetQuestionByQuestionId(int questionId);
+	public QuestionEntity GetQuestionByQuestionId(int ExamId);
 }

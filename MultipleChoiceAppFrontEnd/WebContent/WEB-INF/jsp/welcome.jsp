@@ -9,8 +9,7 @@
 </head>
 <body>
 	ok
-	<c:forEach var="contact" items="${listQuestionsDTO.listAnswerEntity}">
-		${contact.answerId}
-	</c:forEach>
+	<%-- <c:forEach var="contact" items="${contactForm}"> --%>
+	<%-- </c:forEach> --%>
 </body>
 </html>

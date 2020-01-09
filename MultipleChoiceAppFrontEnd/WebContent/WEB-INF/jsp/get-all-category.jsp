@@ -16,24 +16,28 @@
 <body>
 	<div class="content">
 		<div class="container" id="jar">
-			<form:form method="POST" action="welcome" modelAttribute="listQuestionsDTO">
-				<c:forEach var="listQuestionsDTO" items="${listQuestionsDTO}"
+			<form:form method="POST" action="welcome"
+				modelAttribute="listQuestionsDTO">
+				<c:forEach var="content" items="${listQuestionsDTO.listQuestionEntity}"
 					varStatus="status">
 					<div class="content">
 						<div class="row">
 							<div class="col-sm-12">
-								<b>Question ${status.count}:
-									${listQuestionsDTO.contentQuestion} </b>
+								<input type="text" name="listQuestionEntity[${status.index}].questionId"
+									value="${content.questionId}">
+								<b>Question
+									${status.count}: ${content.contentQuestion} </b>
 							</div>
 						</div>
 						<div class="row">
-							<c:forEach items="${listQuestionsDTO.listAnswerEntity}"
-								var="contact" varStatus="statusAn">
+							<c:forEach items="${content.listAnswerEntity}"
+								var="contact" varStatus="statusa">
 								<div class="col-sm-6">
-									<div></div>
-									<input type="radio" value="${contact.answerId}"
-										name="${listQuestionsDTO.questionId}" />
-									${contact.contentAnswer} <br />
+									<%-- <input type="radio"
+										name="listQuestionEntity[${status.index}].listAnswerEntity.[${statusAn.index}].answerId"
+										value="${contact.answerId }"> ${contact.answerId}<br> --%>
+										<input type="text" name="listQuestionEntity[${status.index}].listAnswerEntity.[${statusa.index}].contentAnswer"
+									value="${contact.contentAnswer}">
 								</div>
 							</c:forEach>
 						</div>

@@ -66,7 +66,7 @@ public class QuestionDAOImpl implements QuestionDAO {
 			System.out.println("Cau " + index + ":" + listQuestions.get(index).getContentQuestion());
 			for (int i = 0; i < 4; i++) {
 				System.out.println(
-						"Dap an " + i + ":" + listQuestions.get(index).getListAnswerEntity().get(i).getContentAnswer());
+						"Dap an " + i + ":" + listQuestions.get(index).getListAnswerEntity().get(i).getAnswerId());
 			}
 
 		}

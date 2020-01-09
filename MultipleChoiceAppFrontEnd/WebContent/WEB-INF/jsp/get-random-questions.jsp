@@ -30,8 +30,8 @@
 							<div class="col-sm-6">
 								<div></div>
 								<input type="radio" value="Name"
-									name="listQuestionsDTO.questionId" /> ${contact.contentAnswer}
-								<br />
+									name="listQuestionsDTO.correctAnswer" />
+								${contact.contentAnswer} <br />
 							</div>
 						</c:forEach>
 					</div>

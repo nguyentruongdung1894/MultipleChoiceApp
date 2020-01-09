@@ -3,7 +3,7 @@ package usolv.com.vn.entitys;
 import java.sql.Date;
 
 public class ExamEntity {
-	private String examId;
+	private int examId;
 	private String fullName;
 	private String phone;
 	private String email;
@@ -15,7 +15,7 @@ public class ExamEntity {
 		super();
 	}
 
-	public ExamEntity(String examId, String fullName, String phone, String email, Date examDate, int result,
+	public ExamEntity(int examId, String fullName, String phone, String email, Date examDate, int result,
 			boolean status) {
 		super();
 		this.examId = examId;
@@ -27,11 +27,11 @@ public class ExamEntity {
 		this.status = status;
 	}
 
-	public String getExamId() {
+	public int getExamId() {
 		return examId;
 	}
 
-	public void setExamId(String examId) {
+	public void setExamId(int examId) {
 		this.examId = examId;
 	}
 

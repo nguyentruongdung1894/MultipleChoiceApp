@@ -80,6 +80,7 @@ public class QuestionManagementController {
 		boolean type = Boolean.parseBoolean(request.getParameter("type"));
 		boolean status = Boolean.parseBoolean(request.getParameter("status"));
 		QuestionEntity questionEntity = new QuestionEntity("A00001", categoryId, contentQuestion, type, status);
+
 		List<AnswerEntity> answerList = new ArrayList<AnswerEntity>();
 		for (int index = 0; index < listAnswers.getAnswerEntitys().size(); index++) {
 			AnswerEntity answerEntity = new AnswerEntity();
