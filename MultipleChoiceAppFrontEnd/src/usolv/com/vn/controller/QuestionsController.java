@@ -55,8 +55,12 @@ public class QuestionsController {
 			System.out.println(listQuestionsDTO.getListQuestionEntity().get(i).getListAnswerEntity().size());
 			for (int index = 0; index < listQuestionsDTO.getListQuestionEntity().get(i).getListAnswerEntity()
 					.size(); index++) {
-				System.out.println(listQuestionsDTO.getListQuestionEntity().get(i).getListAnswerEntity().get(index)
-						.getContentAnswer());
+				System.out.println(
+						listQuestionsDTO.getListQuestionEntity().get(i).getListAnswerEntity().get(index).getAnswerId());
+				/*
+				 * System.out.println(listQuestionsDTO.getListQuestionEntity().get(i).
+				 * getListAnswerEntity().get(index) .getContentAnswer());
+				 */
 			}
 		}
 
