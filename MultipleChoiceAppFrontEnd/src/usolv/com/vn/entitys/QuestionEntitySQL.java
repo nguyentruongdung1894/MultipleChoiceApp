@@ -2,7 +2,7 @@ package usolv.com.vn.entitys;
 
 import java.util.List;
 
-public class QuestionEntity {
+public class QuestionEntitySQL {
 	private int questionId;
 	private String adminId;
 	private String categoryId;
@@ -11,11 +11,11 @@ public class QuestionEntity {
 	private boolean status;
 	List<AnswerEntity> listAnswerEntity;
 
-	public QuestionEntity() {
+	public QuestionEntitySQL() {
 		super();
 	}
 
-	public QuestionEntity(int questionId, String adminId, String categoryId, String contentQuestion, boolean type,
+	public QuestionEntitySQL(int questionId, String adminId, String categoryId, String contentQuestion, boolean type,
 			boolean status, List<AnswerEntity> listAnswerEntity) {
 		super();
 		this.questionId = questionId;
@@ -82,5 +82,4 @@ public class QuestionEntity {
 	public void setListAnswerEntity(List<AnswerEntity> listAnswerEntity) {
 		this.listAnswerEntity = listAnswerEntity;
 	}
-
 }

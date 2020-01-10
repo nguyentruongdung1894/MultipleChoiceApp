@@ -1,8 +1,8 @@
 package usolv.com.vn.entitys;
 
 public class AnswerEntity {
-	private String answerId;
-	private String questionId;
+	private int answerId;
+	private int questionId;
 	private String contentAnswer;
 	private boolean correctAnswer;
 
@@ -10,7 +10,7 @@ public class AnswerEntity {
 		super();
 	}
 
-	public AnswerEntity(String answerId, String questionId, String contentAnswer, boolean correctAnswer) {
+	public AnswerEntity(int answerId, int questionId, String contentAnswer, boolean correctAnswer) {
 		super();
 		this.answerId = answerId;
 		this.questionId = questionId;
@@ -18,19 +18,19 @@ public class AnswerEntity {
 		this.correctAnswer = correctAnswer;
 	}
 
-	public String getAnswerId() {
+	public int getAnswerId() {
 		return answerId;
 	}
 
-	public void setAnswerId(String answerId) {
+	public void setAnswerId(int answerId) {
 		this.answerId = answerId;
 	}
 
-	public String getQuestionId() {
+	public int getQuestionId() {
 		return questionId;
 	}
 
-	public void setQuestionId(String questionId) {
+	public void setQuestionId(int questionId) {
 		this.questionId = questionId;
 	}
 

@@ -11,7 +11,7 @@ insert into TB_Category values('C00002','C#',1)
 insert into TB_Category values('C00003','HTML',1)
 insert into TB_Category values('C00004','JAVA',1)
 insert into TB_Category values('C00005','SQL',1)
-
+select * from TB_Question
 ---Inser into table TB_Question
 insert into TB_Question values('A00001','C00004','What is the size of 1 Char?',0,1)
 insert into TB_Question values('A00002','C00004','A class cannot be declared in mode',0,1)
@@ -34,13 +34,12 @@ insert into TB_Question values('A00001','C00004','Integer a = new Integer (2); I
 insert into TB_Question values('A00001','C00004','What are the wait (), notify () and notifyAll () structures in an object that need to be called from the synchronized code?',0,1)
 insert into TB_Question values('A00002','C00004','How to prevent a variable - variable from becoming serialized - is serializable',0,1)
 
-insert into TB_Question values('A00001','C00004','Primitive datatype is allocated based on the stack',1,1)
-insert into TB_Question values('A00002','C00004','Can compare boolean value with integer',1,1)
-insert into TB_Question values('A00002','C00004','If class A works with the interface then must it implement all the constructs of that interface?',1,1)
-insert into TB_Question values('A00001','C00004','Integer a = new Integer (2); Integer b = new Integer (2). What happens if we apply the if (a == b) syntax?',1,1)
-insert into TB_Question values('A00001','C00004','What are the wait (), notify () and notifyAll () structures in an object that need to be called from the synchronized code?',1,1)
-
+insert into TB_Question values('A00001','C00005','Primitive datatype is allocated based on the stack',1,1)
+insert into TB_Question values('A00002','C00005','Can compare boolean value with integer',1,1)
+insert into TB_Question values('A00002','C00005','If class A works with the interface then must it implement all the constructs of that interface?',1,1)
+insert into TB_Question values('A00001','C00005','Integer a = new Integer (2); Integer b = new Integer (2). What happens if we apply the if (a == b) syntax?',1,1)
 insert into TB_Question values('A00001','C00005','What are the wait (), notify () and notifyAll () structures in an object that need to be called from the synchronized code?',1,1)
+
 
 ---Inser into table TB_Answer
 insert into TB_Answer values(1,'4 bit',0)
@@ -169,6 +168,10 @@ insert into TB_Answer values(25,'False',1)
 insert into TB_Answer values(25,'All answers are wrong',0)
 insert into TB_Answer values(25,'All answers are correct',0)
 
+use MultipleChoiceAppUpdate
+delete from TB_Answer
+SELECT * FROM TB_Answer 
+
 insert into TB_Exam values('Nguyen Truong Dung','0982220891','nguyentruongdung1894@gmail.com','2020-01-02',25,1)
 insert into TB_Exam values('Nguyen Van Duc','01569874563','nguyenvanduc012345@gmail.com','2020-03-05',17,1)
 insert into TB_Exam values('Bui Duc Nhat','0982220891','buiduc14141441@gmail.com','2020-07-09',21,1)
@@ -216,4 +219,4 @@ select ex.AnswerId, ex.QuestionId from TB_ExamResult ex inner join TB_Exam e on 
 
 select * from TB_Answer where QuestionId = '23' AND CorrectAnswer = 1
 
-select * from TB_ExamResult
+SELECT TOP 5 * FROM TB_Question WHERE Status = 1 WHERE CategoryId = 'C00005' ORDER BY NEWID()

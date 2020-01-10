@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<a href="get-random-questions">Click</a>
+	<a href="login">Click</a>
 </body>
 </html>

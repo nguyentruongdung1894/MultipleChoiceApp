@@ -14,10 +14,24 @@
 <script src=<c:url value="/resources/js/fontawesome.js" />></script>
 </head>
 <body>
-	<div class="content">
+	<div class="container">
+		Hi: ${examEntity.fullName}
+		<%-- <input type="text" name="phone" value="${examEntity.fullName}"> 
+		<input type="text" name="email" value="${examEntity.phone}"> 
+		<input type="text" name="firstname" value="${examEntity.email}"> --%>
+	</div>
+	<div class="">
 		<div class="container" id="jar">
 			<form:form method="POST" action="welcome"
 				modelAttribute="listQuestionsDTO">
+
+				<input type="text" name="fullName" value="${examEntity.fullName}"
+					style="display: none;">
+				<input type="text" name="phone" value="${examEntity.phone}"
+					style="display: none;">
+				<input type="text" name="email" value="${examEntity.email}"
+					style="display: none;">
+
 				<c:forEach var="content"
 					items="${listQuestionsDTO.listQuestionEntity}" varStatus="status">
 					<div class="content">
@@ -25,7 +39,7 @@
 							<div class="col-sm-12">
 								<input type="text"
 									name="listQuestionEntity[${status.index}].questionId"
-									value="${content.questionId}"> <b>Question
+									value="${content.questionId}" style="display: none;"> <b>Question
 									${status.count}: ${content.contentQuestion} </b>
 							</div>
 						</div>
@@ -33,11 +47,9 @@
 							<c:forEach items="${content.listAnswerEntity}" var="contact"
 								varStatus="statusa">
 								<div class="col-sm-6">
-									<input type="radio"
-										name="listQuestionEntity[${status.index}].listAnswerEntity[${status.index}].answerId"
+									<input type="checkbox"
+										name="listQuestionEntity[${status.index}].listAnswerEntity[${statusa.index}].answerId"
 										value="${contact.answerId }"> ${contact.contentAnswer}<br>
-									<%-- <input type="text" name="listQuestionEntity[${status.index}].listAnswerEntity[${statusa.index}].answerId"
-									value="${contact.answerId}"> --%>
 								</div>
 							</c:forEach>
 						</div>

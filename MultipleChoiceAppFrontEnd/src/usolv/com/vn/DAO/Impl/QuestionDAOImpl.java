@@ -12,6 +12,7 @@ import usolv.com.vn.DAO.QuestionDAO;
 import usolv.com.vn.connectDB.SQLConnection;
 import usolv.com.vn.entitys.AnswerEntity;
 import usolv.com.vn.entitys.QuestionEntity;
+import usolv.com.vn.entitys.QuestionEntitySQL;
 
 public class QuestionDAOImpl implements QuestionDAO {
 	private AnswerDAO answerDAO;
@@ -26,15 +27,15 @@ public class QuestionDAOImpl implements QuestionDAO {
 		Connection conn = null;
 		Statement stm = null;
 		ResultSet rs = null;
-		String sql = "SELECT TOP 5 * FROM TB_Question WHERE Status = 1 ORDER BY NEWID() ";
+		String sql = "SELECT TOP 5 * FROM TB_Question WHERE Status = 1 ORDER BY NEWID()";
 		try {
 			conn = SQLConnection.getConnectionSqlServer();
 			stm = conn.createStatement();
 			rs = stm.executeQuery(sql);
 			while (rs.next()) {
 				QuestionEntity questions = new QuestionEntity();
-				List<AnswerEntity> listAnswerEntity = answerDAO.GetAnswersByAnswersId(rs.getString("QuestionId"));
-				questions.setQuestionId(rs.getString("QuestionId"));
+				List<AnswerEntity> listAnswerEntity = answerDAO.GetAnswersByAnswersId(rs.getInt("QuestionId"));
+				questions.setQuestionId(rs.getInt("QuestionId"));
 				questions.setAdminId(rs.getString("AdminId"));
 				questions.setCategoryId(rs.getString("CategoryId"));
 				questions.setContentQuestion(rs.getString("ContentQuestion"));
@@ -59,17 +60,56 @@ public class QuestionDAOImpl implements QuestionDAO {
 		return listQuestions;
 	}
 
-	public static void main(String[] args) {
-		QuestionDAOImpl questionDAOImpl = new QuestionDAOImpl();
-		List<QuestionEntity> listQuestions = questionDAOImpl.GetAllQuestions();
-		for (int index = 0; index < listQuestions.size(); index++) {
-			System.out.println("Cau " + index + ":" + listQuestions.get(index).getContentQuestion());
-			for (int i = 0; i < 4; i++) {
-				System.out.println(
-						"Dap an " + i + ":" + listQuestions.get(index).getListAnswerEntity().get(i).getAnswerId());
+	@Override
+	public List<QuestionEntitySQL> GetAllQuestionsSQL() {
+		List<QuestionEntitySQL> listQuestionsSQL = new ArrayList<QuestionEntitySQL>();
+		Connection conn = null;
+		Statement stm = null;
+		ResultSet rs = null;
+		String sql = "SELECT TOP 5 * FROM TB_Question WHERE Status = 1 AND CategoryId = 'C00005' ORDER BY NEWID()";
+		try {
+			conn = SQLConnection.getConnectionSqlServer();
+			stm = conn.createStatement();
+			rs = stm.executeQuery(sql);
+			while (rs.next()) {
+				QuestionEntitySQL questionsSql = new QuestionEntitySQL();
+				List<AnswerEntity> listAnswerEntity = answerDAO.GetAnswersByAnswersId(rs.getInt("QuestionId"));
+				questionsSql.setQuestionId(rs.getInt("QuestionId"));
+				questionsSql.setAdminId(rs.getString("AdminId"));
+				questionsSql.setCategoryId(rs.getString("CategoryId"));
+				questionsSql.setContentQuestion(rs.getString("ContentQuestion"));
+				questionsSql.setType(rs.getBoolean("Type"));
+				questionsSql.setStatus(rs.getBoolean("Status"));
+				questionsSql.setListAnswerEntity(listAnswerEntity);
+				listQuestionsSQL.add(questionsSql);
 			}
-
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				stm.close();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-
+		return listQuestionsSQL;
 	}
+
+//	public static void main(String[] args) {
+//		QuestionDAOImpl questionDAOImpl = new QuestionDAOImpl();
+//		List<QuestionEntity> listQuestions = questionDAOImpl.GetAllQuestions();
+//		for (int index = 0; index < listQuestions.size(); index++) {
+//			System.out.println("Cau " + index + ":" + listQuestions.get(index).getContentQuestion());
+//			for (int i = 0; i < 4; i++) {
+//				System.out.println(
+//						"Dap an " + i + ":" + listQuestions.get(index).getListAnswerEntity().get(i).getAnswerId());
+//			}
+//
+//		}
+//
+//	}
 }
