@@ -1,0 +1,92 @@
+.logo {
+	width: 35%;
+}
+
+.textHeader {
+	font-size: 25px;
+	color: #ee7c04;
+	margin-left: 55px;
+}
+
+.timeDate {
+	padding: 7px
+}
+
+.title {
+	background: #ee7c04;
+	padding: 5px 0px;
+	text-align: center;
+	margin-bottom: 25px;
+	border: 1px black solid;
+}
+
+.contentAnswer {
+	padding: 35px 70px;
+}
+
+.childcontentAnswer {
+	padding: 5px 0px;
+}
+
+.current-page {
+	display: none;
+}
+
+.page-item {
+	display: none;
+}
+
+.page-itemP {
+	margin-right: 130px;
+	border: 1px black solid;
+	color: black;
+	background-color: #ee7c04;
+	font-weight: bold;
+	padding: 10px 30px;
+}
+
+.page-itemN {
+	margin-left: 130px;
+	border: 1px black solid;
+	background-color: #ee7c04;
+	padding: 10px 30px;
+}
+
+.page-link {
+	font-weight: bold;
+	color: black;
+	background: #ee7c04;
+	border: none;
+}
+
+.page-link:hover {
+	background: #ee7c04;
+	color: black;
+}
+
+.footer {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: #ee7c04;
+	color: white;
+	text-align: center;
+	padding: 10px;
+}
+
+.countdown {
+	margin: 0 auto;
+	max-width: 350px;
+}
+
+.countdown .square {
+	display: inline-block;
+}
+
+.countdown .digits {
+	font-size: 15px;
+	background: #fff;
+	color: #000;
+	border-radius: 5px;
+}

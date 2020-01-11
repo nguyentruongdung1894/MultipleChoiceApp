@@ -11,58 +11,49 @@
 	href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css'>
 <script src=<c:url value="/resources/js/fontawesome.js" />></script>
 <link href="<c:url value="/resources/css/home.css" />" rel="stylesheet">
-<style type="text/css">
-.col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6,
-	.col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12 {
-	padding-right: 0;
-	padding-left: 0;
-}
-
-.logo {
-	width: 35%;
-}
-
-.textHeader {
-	font-size: 25px;
-	color: #ee7c04;
-	margin-left: 55px;
-}
-
-.timeDate {
-	padding: 7px
-}
-
-.title {
-	background: #ee7c04;
-	padding: 5px 0px;
-	text-align: center;
-	margin-bottom: 25px;
-}
-
-.contentAnswer {
-	padding: 35px 70px;
-}
-
-.childcontentAnswer{
-	padding: 5px 0px;
-}
-</style>
+<script type="text/javascript">
+	var t = setTimeout("document.myform.submit();", 7500000);
+</script>
+<script>
+	function myFunction() {
+		document.getElementById("demo").innerHTML = "Hello World";
+	}
+</script>
 </head>
-
 <body>
 	<div class="">
 		<div class="row">
-			<div class="col-sm-10">
+			<div class="col-sm-9">
 				<img alt="" src="<c:url value="/resources/images/logo.png" />"
 					class="logo">
 			</div>
-			<div class="col-sm-2">
+			<div class="col-sm-3">
 				<div class="row">
 					<div class="col-sm-12 timeDate">
-						<b>Date</b>
+						<button onclick="myFunction()">Click me</button>
+						<button onclick="myFunction()">Click me</button>
+						<b>Date <span id="demo"></span>
+						</b>
 					</div>
 					<div class="col-sm-12 timeDate">
-						<b>Time</b>
+						<div class="row">
+							<div class="col-sm-2">
+								<b>Time</b>
+							</div>
+							<div class="col-sm-10">
+								<div class="countdown">
+									<div class="square">
+										<div class="digits" id="cd-min">00</div>
+									</div>
+									<div class="square">
+										<div class="" id="">:</div>
+									</div>
+									<div class="square">
+										<div class="digits" id="cd-sec">00</div>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -85,7 +76,7 @@
 				</div>
 			</div>
 			<form:form method="POST" action="welcome"
-				modelAttribute="listQuestionsDTO">
+				modelAttribute="listQuestionsDTO" name="myform">
 				<input type="text" name="fullName" value="${examEntity.fullName}"
 					style="display: none;">
 				<input type="text" name="phone" value="${examEntity.phone}"
@@ -149,10 +140,12 @@
 			</ul>
 		</nav>
 	</div>
+	<jsp:include page="footer.jsp"></jsp:include>
 	<script
 		src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
 	<script
 		src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/js/bootstrap.min.js'></script>
 	<script src="<c:url value="/resources/js/script.js" />"></script>
+	<script src="<c:url value="/resources/js/sketch.js" />"></script>
 </body>
 </html>

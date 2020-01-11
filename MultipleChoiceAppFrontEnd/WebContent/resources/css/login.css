@@ -16,7 +16,7 @@
 .formLogin {
 	height: 350px;
 	width: 700px;
-	margin: 100px auto;
+	margin: 70px auto;
 	border: 1px black solid;
 }
 
@@ -58,4 +58,15 @@
 	border: 1px black solid;
 	padding: 10px 40px;
 	font-weight: bold;
+}
+
+.footer {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: #ee7c04;
+	color: white;
+	text-align: center;
+	padding: 10px;
 }

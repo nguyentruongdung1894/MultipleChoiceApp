@@ -37,14 +37,21 @@ $(function() {
   var paginationSize = 7;
   var currentPage;
 
+  
   function showPage(whichPage) {
     if (whichPage < 1 || whichPage > totalPages) return false;
     currentPage = whichPage;
+    
+    
     $("#jar .content")
       .hide()
       .slice((currentPage - 1) * limitPerPage, currentPage * limitPerPage)
       .show();
+    
+    
     $(".pagination li").slice(1, -1).remove();
+    
+    
     getPageList(totalPages, currentPage, paginationSize).forEach(item => {
       $("<li>")
         .addClass(
@@ -64,8 +71,10 @@ $(function() {
     });
     return true;
   }
+  
+  
   $(".pagination").append(
-    $("<li>").addClass("page-item").attr({ id: "previous-page" }).append(
+    $("<li>").addClass("page-itemP").attr({ id: "previous-page" }).append(
       $("<a>")
         .addClass("page-link")
         .attr({
@@ -73,7 +82,7 @@ $(function() {
         })
         .text("Prev")
     ),
-    $("<li>").addClass("page-item").attr({ id: "next-page" }).append(
+    $("<li>").addClass("page-itemN").attr({ id: "next-page" }).append(
       $("<a>")
         .addClass("page-link")
         .attr({
@@ -82,20 +91,29 @@ $(function() {
         .text("Next")
     )
   );
+  
+  
   $("#jar").show();
   showPage(1);
+  
+  
   $(
     document
   ).on("click", ".pagination li.current-page:not(.active)", function() {
     return showPage(+$(this).text());
   });
+  
+  
   $("#next-page").on("click", function() {
     return showPage(currentPage + 1);
   });
 
+  
   $("#previous-page").on("click", function() {
     return showPage(currentPage - 1);
   });
+  
+  
   $(".pagination").on("click", function() {
     $("html,body").animate({ scrollTop: 0 }, 0);
   });
