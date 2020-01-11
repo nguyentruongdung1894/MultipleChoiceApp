@@ -16,33 +16,72 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<link href="<c:url value="/resources/css/login.css" />"
+	rel="stylesheet">
 </head>
 <body>
+	<div class="header">
+		<div class="row">
+			<div class="col-sm-12">
+				<img alt="" src="<c:url value="/resources/images/logo.png" />"
+					class="logo">
+			</div>
+			<div class="col-sm-12">
+				<b class="textHeader">CHALLENGE FOR CHANGE</b>
+			</div>
+		</div>
+	</div>
 	<div class="container">
-		<h2>Stacked form</h2>
-		<form:form action="get-random-questions" modelAttribute="examEntity" method="post">
-			<div class="form-group">
-				<label for="">Full name:</label> <input type="text"
-					class="form-control" id="" placeholder="Enter fullname"
-					name="fullName">
+		<div class="formLogin">
+			<div class="hederFromLogin">
+				<b>Thong tin ung vien</b>
 			</div>
-			<div class="form-group">
-				<label for="">Phone:</label> <input type="text" class="form-control"
-					id="" placeholder="Enter phone" name="phone">
+			<div class="form">
+				<form:form action="get-random-questions" modelAttribute="examEntity"
+					method="post">
+					<div class="row">
+						<div class="col-sm-2 lable">
+							<label for="">Full name:</label>
+						</div>
+						<div class="col-sm-10 inputdiv">
+							<input type="text" class="form-control" id=""
+								placeholder="Enter fullname" name="fullName"> <label
+								class="check">(*)</label>
+						</div>
+						<div class="col-sm-2 lable">
+							<label for="">Phone:</label>
+						</div>
+						<div class="col-sm-10 input">
+							<input type="text" class="form-control" id=""
+								placeholder="Enter phone" name="phone"> <label
+								class="check">(*)</label>
+						</div>
+						<div class="col-sm-2 lable">
+							<label for="">Email:</label>
+						</div>
+						<div class="col-sm-10 input">
+							<input type="text" class="form-control" id=""
+								placeholder="Enter email" name="email"> <label
+								class="check">(*)</label>
+						</div>
+						<div class="col-sm-2 lable">
+							<label for="">Language:</label>
+						</div>
+						<div class="col-sm-10 input">
+							<select name="categoryId" class="form-control">
+								<c:forEach items="${listCategoryEntity}"
+									var="listCategoryEntity">
+									<option value="${listCategoryEntity.categoryId}">${listCategoryEntity.categoryName}</option>
+								</c:forEach>
+							</select> <label class="check">(*)</label>
+						</div>
+					</div>
+					<div style="width: 100%; margin: 0 auto; text-align: center">
+						<button type="submit" class="btn">Start</button>
+					</div>
+				</form:form>
 			</div>
-			<div class="form-group">
-				<label for="">Email:</label> <input type="text" class="form-control"
-					id="" placeholder="Enter email" name="email">
-			</div>
-			<div class="form-group">
-				<select name="categoryId">
-					<c:forEach items="${listCategoryEntity}" var="listCategoryEntity">
-						<option value="${listCategoryEntity.categoryId}">${listCategoryEntity.categoryName}</option>
-					</c:forEach>
-				</select>
-			</div>
-			<button type="submit" class="btn btn-primary">Submit</button>
-		</form:form>
+		</div>
 	</div>
 </body>
 </html>

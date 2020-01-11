@@ -1,6 +1,7 @@
 package usolv.com.vn.DAO.Impl;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -22,16 +23,17 @@ public class QuestionDAOImpl implements QuestionDAO {
 	}
 
 	@Override
-	public List<QuestionEntity> GetAllQuestions() {
+	public List<QuestionEntity> GetAllQuestions(String categoryId) {
 		List<QuestionEntity> listQuestions = new ArrayList<QuestionEntity>();
 		Connection conn = null;
-		Statement stm = null;
+		PreparedStatement pstm = null;
 		ResultSet rs = null;
-		String sql = "SELECT TOP 5 * FROM TB_Question WHERE Status = 1 ORDER BY NEWID()";
+		String sql = "SELECT TOP 5 * FROM TB_Question WHERE Status = 1 AND CategoryId = ? ORDER BY NEWID()";
 		try {
 			conn = SQLConnection.getConnectionSqlServer();
-			stm = conn.createStatement();
-			rs = stm.executeQuery(sql);
+			pstm = conn.prepareStatement(sql);
+			pstm.setString(1, categoryId);
+			rs = pstm.executeQuery();
 			while (rs.next()) {
 				QuestionEntity questions = new QuestionEntity();
 				List<AnswerEntity> listAnswerEntity = answerDAO.GetAnswersByAnswersId(rs.getInt("QuestionId"));
@@ -50,7 +52,7 @@ public class QuestionDAOImpl implements QuestionDAO {
 		} finally {
 			try {
 				rs.close();
-				stm.close();
+				pstm.close();
 				conn.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -98,18 +100,4 @@ public class QuestionDAOImpl implements QuestionDAO {
 		}
 		return listQuestionsSQL;
 	}
-
-//	public static void main(String[] args) {
-//		QuestionDAOImpl questionDAOImpl = new QuestionDAOImpl();
-//		List<QuestionEntity> listQuestions = questionDAOImpl.GetAllQuestions();
-//		for (int index = 0; index < listQuestions.size(); index++) {
-//			System.out.println("Cau " + index + ":" + listQuestions.get(index).getContentQuestion());
-//			for (int i = 0; i < 4; i++) {
-//				System.out.println(
-//						"Dap an " + i + ":" + listQuestions.get(index).getListAnswerEntity().get(i).getAnswerId());
-//			}
-//
-//		}
-//
-//	}
 }

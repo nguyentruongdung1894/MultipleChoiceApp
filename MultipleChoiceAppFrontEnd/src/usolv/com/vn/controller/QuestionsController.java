@@ -19,6 +19,7 @@ import usolv.com.vn.DAO.Impl.CategoryDAOImpl;
 import usolv.com.vn.DAO.Impl.ExamDAOImpl;
 import usolv.com.vn.DAO.Impl.QuestionDAOImpl;
 import usolv.com.vn.entitys.CategoryEntity;
+import usolv.com.vn.entitys.CorrectChooseEntity;
 import usolv.com.vn.entitys.ExamEntity;
 import usolv.com.vn.entitys.ExamResult;
 import usolv.com.vn.entitys.ListAQ;
@@ -47,33 +48,82 @@ public class QuestionsController {
 	@RequestMapping(value = "get-random-questions", method = RequestMethod.POST)
 	public String GetAllQuestion(ModelMap modelmap, @ModelAttribute("examEntity") ExamEntity examEntity,
 			HttpServletRequest request) {
+//		System.out.println(examEntity.getFullName());
+		String categoryId = request.getParameter("categoryId");
 		ListAQ listAQ = new ListAQ();
-		listAQ.setListQuestionEntity(questionDAO.GetAllQuestions());
+		listAQ.setListQuestionEntity(questionDAO.GetAllQuestions(categoryId));
+		listAQ.setListQuestionEntitySQL(questionDAO.GetAllQuestionsSQL());
 		modelmap.addAttribute("listQuestionsDTO", listAQ);
-		/*
-		 * System.out.println(examEntity.getFullName()); String categoryId =
-		 * request.getParameter("categoryId"); System.out.println(categoryId);
-		 */
-		request.setAttribute("examEntity", examEntity);
-		return "get-all-category";
+		return "get-random-questions";
 	}
 
 	@RequestMapping(value = "welcome", method = RequestMethod.POST)
 	public ModelAndView SubmitSucc(@ModelAttribute("listQuestionsDTO") ListAQ listQuestionsDTO,
 			HttpServletRequest request) {
+		int score = 0;
+		int rqCount = 0;
+		int dem = 0;
+		int answerId = 0;
+		int questionId = 0;
 		long d = System.currentTimeMillis();
 		Date date = new Date(d);
 		String fullName = request.getParameter("fullName");
 		String phone = request.getParameter("phone");
 		String email = request.getParameter("email");
-		ExamEntity examEntity = new ExamEntity(fullName, phone, email, date, 17, true);
-		boolean check = examDAO.addExam(examEntity);
-		System.out.println(check);
+		for (int x = 0; x < listQuestionsDTO.getListQuestionEntity().size(); x++) {
+			for (int y = 0; y < listQuestionsDTO.getListQuestionEntity().get(x).getListAnswerEntity().size(); y++) {
+				if (listQuestionsDTO.getListQuestionEntity().get(x).getListAnswerEntity().get(y).getAnswerId() != 0) {
+					rqCount++;
+				}
+			}
+			questionId = listQuestionsDTO.getListQuestionEntity().get(x).getQuestionId();
+			List<CorrectChooseEntity> listCorrectChooseEntity = examDAO.GetCorrectChooseEntity(questionId);
+			if (rqCount == listCorrectChooseEntity.size()) {
+				for (int z = 0; z < listQuestionsDTO.getListQuestionEntity().get(x).getListAnswerEntity().size(); z++) {
+					for (int t = 0; t < listCorrectChooseEntity.size(); t++) {
+						if (listQuestionsDTO.getListQuestionEntity().get(x).getListAnswerEntity().get(z)
+								.getAnswerId() == listCorrectChooseEntity.get(t).getCorrectChooseEntity()) {
+							dem++;
+						}
+					}
+				}
+				if (dem == listCorrectChooseEntity.size()) {
+					score++;
+				}
+				dem = 0;
+			}
+			rqCount = 0;
+		}
+		for (int x = 0; x < listQuestionsDTO.getListQuestionEntitySQL().size(); x++) {
+			for (int y = 0; y < listQuestionsDTO.getListQuestionEntitySQL().get(x).getListAnswerEntity().size(); y++) {
+				if (listQuestionsDTO.getListQuestionEntitySQL().get(x).getListAnswerEntity().get(y)
+						.getAnswerId() != 0) {
+					rqCount++;
+				}
+			}
+			questionId = listQuestionsDTO.getListQuestionEntitySQL().get(x).getQuestionId();
+			List<CorrectChooseEntity> listCorrectChooseEntity = examDAO.GetCorrectChooseEntity(questionId);
+			if (rqCount == listCorrectChooseEntity.size()) {
+				for (int z = 0; z < listQuestionsDTO.getListQuestionEntitySQL().get(x).getListAnswerEntity()
+						.size(); z++) {
+					for (int t = 0; t < listCorrectChooseEntity.size(); t++) {
+						if (listQuestionsDTO.getListQuestionEntitySQL().get(x).getListAnswerEntity().get(z)
+								.getAnswerId() == listCorrectChooseEntity.get(t).getCorrectChooseEntity()) {
+							dem++;
+						}
+					}
+				}
+				if (dem == listCorrectChooseEntity.size()) {
+					score++;
+				}
+				dem = 0;
+			}
+			rqCount = 0;
+		}
+		ExamEntity examEntity = new ExamEntity(fullName, phone, email, date, score, true);
+		examDAO.addExam(examEntity);
 		ExamEntity listExam = examDAO.GetExamEntity();
 		int examId = listExam.getExamId();
-		System.out.println(examId);
-		int answerId = 0;
-		int questionId = 0;
 		for (int i = 0; i < listQuestionsDTO.getListQuestionEntity().size(); i++) {
 			questionId = listQuestionsDTO.getListQuestionEntity().get(i).getQuestionId();
 			for (int index = 0; index < listQuestionsDTO.getListQuestionEntity().get(i).getListAnswerEntity()
@@ -85,11 +135,24 @@ public class QuestionsController {
 					answerId = listQuestionsDTO.getListQuestionEntity().get(i).getListAnswerEntity().get(index)
 							.getAnswerId();
 					ExamResult examResult = new ExamResult(examId, answerId, questionId);
-					boolean check1 = examDAO.addExamResult(examResult);
-					System.out.println(check1);
+					examDAO.addExamResult(examResult);
 				}
 			}
-			System.out.println("====================");
+		}
+		for (int i = 0; i < listQuestionsDTO.getListQuestionEntitySQL().size(); i++) {
+			questionId = listQuestionsDTO.getListQuestionEntitySQL().get(i).getQuestionId();
+			for (int index = 0; index < listQuestionsDTO.getListQuestionEntitySQL().get(i).getListAnswerEntity()
+					.size(); index++) {
+				if (listQuestionsDTO.getListQuestionEntitySQL().get(i).getListAnswerEntity().get(index)
+						.getAnswerId() == 0) {
+					continue;
+				} else {
+					answerId = listQuestionsDTO.getListQuestionEntitySQL().get(i).getListAnswerEntity().get(index)
+							.getAnswerId();
+					ExamResult examResult = new ExamResult(examId, answerId, questionId);
+					examDAO.addExamResult(examResult);
+				}
+			}
 		}
 		return new ModelAndView("welcome", "contactForm", listQuestionsDTO);
 	}

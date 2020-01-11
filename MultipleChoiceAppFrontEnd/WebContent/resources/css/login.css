@@ -1,0 +1,61 @@
+.col-sm-2, .col-sm-10 {
+	padding-right: 0;
+	padding-left: 0;
+}
+
+.logo {
+	width: 35%;
+}
+
+.textHeader {
+	font-size: 25px;
+	color: #ee7c04;
+	margin-left: 55px;
+}
+
+.formLogin {
+	height: 350px;
+	width: 700px;
+	margin: 100px auto;
+	border: 1px black solid;
+}
+
+.hederFromLogin {
+	border-bottom: 1px black solid;
+	background: #ee7c04;
+	padding: 5px 15px
+}
+
+.lable {
+	float: left;
+	text-align: center;
+	margin: 10px 0px;
+}
+
+.form {
+	margin-top: 30px;
+	padding: 0px 55px 10px 15px;
+	font-weight: bold;
+}
+
+.inputdiv {
+	margin: 5px 0px;
+}
+
+.check {
+	color: red;
+}
+
+.form-control {
+	width: 90%;
+	float: left;
+	margin-right: 10px;
+}
+
+.btn {
+	color: black;
+	background: #ee7c04;
+	border: 1px black solid;
+	padding: 10px 40px;
+	font-weight: bold;
+}

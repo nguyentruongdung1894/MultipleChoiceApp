@@ -14,12 +14,7 @@
 <script src=<c:url value="/resources/js/fontawesome.js" />></script>
 </head>
 <body>
-	<div class="container">
-		Hi: ${examEntity.fullName}
-		<%-- <input type="text" name="phone" value="${examEntity.fullName}"> 
-		<input type="text" name="email" value="${examEntity.phone}"> 
-		<input type="text" name="firstname" value="${examEntity.email}"> --%>
-	</div>
+	<div class="container">Hi: ${examEntity.fullName}</div>
 	<div class="">
 		<div class="container" id="jar">
 			<form:form method="POST" action="welcome"
@@ -39,7 +34,7 @@
 							<div class="col-sm-12">
 								<input type="text"
 									name="listQuestionEntity[${status.index}].questionId"
-									value="${content.questionId}" style="display: none;"> <b>Question
+									value="${content.questionId}"> <b>Question
 									${status.count}: ${content.contentQuestion} </b>
 							</div>
 						</div>
@@ -50,6 +45,31 @@
 									<input type="checkbox"
 										name="listQuestionEntity[${status.index}].listAnswerEntity[${statusa.index}].answerId"
 										value="${contact.answerId }"> ${contact.contentAnswer}<br>
+								</div>
+							</c:forEach>
+						</div>
+					</div>
+				</c:forEach>
+				<c:forEach var="questionSQL"
+					items="${listQuestionsDTO.listQuestionEntitySQL}"
+					varStatus="status">
+					<div class="content">
+						<div class="row">
+							<div class="col-sm-12">
+								<input type="text"
+									name="listQuestionEntitySQL[${status.index}].questionId"
+									value="${questionSQL.questionId}"> <b>Question
+									${status.count}: ${questionSQL.contentQuestion} </b>
+							</div>
+						</div>
+						<div class="row">
+							<c:forEach items="${questionSQL.listAnswerEntity}"
+								var="answerSQL" varStatus="statusa">
+								<div class="col-sm-6">
+									<input type="checkbox"
+										name="listQuestionEntitySQL[${status.index}].listAnswerEntity[${statusa.index}].answerId"
+										value="${answerSQL.answerId }">
+									${answerSQL.contentAnswer}<br>
 								</div>
 							</c:forEach>
 						</div>

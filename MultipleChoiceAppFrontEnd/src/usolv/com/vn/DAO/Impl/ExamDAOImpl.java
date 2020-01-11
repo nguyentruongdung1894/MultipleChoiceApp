@@ -10,6 +10,7 @@ import java.util.List;
 
 import usolv.com.vn.DAO.ExamDAO;
 import usolv.com.vn.connectDB.SQLConnection;
+import usolv.com.vn.entitys.CorrectChooseEntity;
 import usolv.com.vn.entitys.ExamEntity;
 import usolv.com.vn.entitys.ExamResult;
 
@@ -54,8 +55,7 @@ public class ExamDAOImpl implements ExamDAO {
 	}
 
 	@Override
-	public boolean addExam(ExamEntity examEntity) {
-		boolean check = false;
+	public void addExam(ExamEntity examEntity) {
 		Connection conn = null;
 		PreparedStatement pstm = null;
 		String query = "insert into TB_Exam values(?,?,?,?,?,?)";
@@ -68,12 +68,7 @@ public class ExamDAOImpl implements ExamDAO {
 			pstm.setDate(4, (java.sql.Date) examEntity.getExamDate());
 			pstm.setInt(5, examEntity.getResult());
 			pstm.setBoolean(6, examEntity.isStatus());
-			int count = pstm.executeUpdate();
-			if (count != 0) {
-				check = true;
-			} else {
-				check = false;
-			}
+			pstm.executeUpdate();
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -86,12 +81,10 @@ public class ExamDAOImpl implements ExamDAO {
 				e.printStackTrace();
 			}
 		}
-		return check;
 	}
 
 	@Override
-	public boolean addExamResult(ExamResult examResult) {
-		boolean check = false;
+	public void addExamResult(ExamResult examResult) {
 		Connection conn = null;
 		PreparedStatement pstm = null;
 		String query = "insert into TB_ExamResult values(?,?,?)";
@@ -101,12 +94,7 @@ public class ExamDAOImpl implements ExamDAO {
 			pstm.setInt(1, examResult.getExamId());
 			pstm.setInt(2, examResult.getAnswerId());
 			pstm.setInt(3, examResult.getQuestionId());
-			int count = pstm.executeUpdate();
-			if (count != 0) {
-				check = true;
-			} else {
-				check = false;
-			}
+			pstm.executeUpdate();
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -119,7 +107,6 @@ public class ExamDAOImpl implements ExamDAO {
 				e.printStackTrace();
 			}
 		}
-		return check;
 	}
 
 	@Override
@@ -158,10 +145,42 @@ public class ExamDAOImpl implements ExamDAO {
 		return examEntity;
 	}
 
-//	public static void main(String[] args) {
-//		ExamDAOImpl a = new ExamDAOImpl();
-//		ExamResult eExamEntity = new ExamResult(1,37,10);
-//		boolean check = a.addExamResult(eExamEntity);
-//		System.out.println(check);
-//	}
+	@Override
+	public List<CorrectChooseEntity> GetCorrectChooseEntity(int questionId) {
+		Connection conn = null;
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		String sql = "select AnswerId from TB_Question q inner join TB_Answer a on q.QuestionId = a.QuestionId where q.QuestionId = ? AND a.CorrectAnswer = 1";
+		List<CorrectChooseEntity> listCorrectChooseEntity = new ArrayList<CorrectChooseEntity>();
+		try {
+			conn = SQLConnection.getConnectionSqlServer();
+			pstm = conn.prepareStatement(sql);
+			pstm.setInt(1, questionId);
+			rs = pstm.executeQuery();
+			while (rs.next()) {
+				CorrectChooseEntity answerChooseEntity = new CorrectChooseEntity();
+				answerChooseEntity.setCorrectChooseEntity((rs.getInt("AnswerId")));
+				listCorrectChooseEntity.add(answerChooseEntity);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstm.close();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return listCorrectChooseEntity;
+	}
+
+	public static void main(String[] args) {
+		ExamDAOImpl a = new ExamDAOImpl();
+		List<CorrectChooseEntity> listCorrectChooseEntity = a.GetCorrectChooseEntity(12);
+		System.out.println(listCorrectChooseEntity.size());
+	}
 }

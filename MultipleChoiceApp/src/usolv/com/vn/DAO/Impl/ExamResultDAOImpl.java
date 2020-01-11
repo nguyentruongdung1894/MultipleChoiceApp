@@ -66,8 +66,8 @@ public class ExamResultDAOImpl implements ExamResultDAO {
 				examResultEntity.setQuestionId(rs.getInt("QuestionId"));
 				examResultEntity
 						.setListAnswerChooseEntity(examResultDAOImpl.GetAnswerChooseEntity(rs.getInt("QuestionId")));
-				examResultEntity
-						.setListCorrectChooseEntity(examResultDAOImpl.GetCorrectChooseEntity(rs.getInt("QuestionId")));
+				examResultEntity.setListCorrectChooseEntity(
+						examResultDAOImpl.GetCorrectChooseEntity(rs.getInt("QuestionId"), examId));
 				listExamResultEntity.add(examResultEntity);
 			}
 		} catch (Exception e) {
@@ -87,16 +87,17 @@ public class ExamResultDAOImpl implements ExamResultDAO {
 	}
 
 	@Override
-	public List<CorrectChooseEntity> GetCorrectChooseEntity(int questionId) {
+	public List<CorrectChooseEntity> GetCorrectChooseEntity(int questionId, int examId) {
 		Connection conn = null;
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
-		String sql = "SELECT AnswerId FROM TB_ExamResult where QuestionId = ?";
+		String sql = "SELECT AnswerId FROM TB_ExamResult where QuestionId = ? AND ExamId =?";
 		List<CorrectChooseEntity> listCorrectChooseEntity = new ArrayList<CorrectChooseEntity>();
 		try {
 			conn = SQLConnection.getConnectionSqlServer();
 			pstm = conn.prepareStatement(sql);
 			pstm.setInt(1, questionId);
+			pstm.setInt(2, examId);
 			rs = pstm.executeQuery();
 			while (rs.next()) {
 				CorrectChooseEntity correctChooseEntity = new CorrectChooseEntity();
@@ -118,18 +119,17 @@ public class ExamResultDAOImpl implements ExamResultDAO {
 		}
 		return listCorrectChooseEntity;
 	}
-
 	public static void main(String[] args) {
 		ExamResultDAOImpl examResultDAOImpl = new ExamResultDAOImpl();
-		List<ExamResultEntity> listExamResultEntity = examResultDAOImpl.GetExamResultEntityId(3);
+		List<ExamResultEntity> listExamResultEntity = examResultDAOImpl.GetExamResultEntityId(1);
 		for (int index = 0; index < listExamResultEntity.size(); index++) {
+			System.out.println("Question Id: " + listExamResultEntity.get(index).getQuestionId());
 			for (int i = 0; i < listExamResultEntity.get(index).getListAnswerChooseEntity().size(); i++) {
-				System.out.println("Dap an chon: "
+				System.out.println("Dap an dung: "
 						+ listExamResultEntity.get(index).getListAnswerChooseEntity().get(i).getAnswerChooseEntity());
 			}
-			System.out.println("----------");
 			for (int y = 0; y < listExamResultEntity.get(index).getListCorrectChooseEntity().size(); y++) {
-				System.out.println("Dap an dung: "
+				System.out.println("Dap an chon: "
 						+ listExamResultEntity.get(index).getListCorrectChooseEntity().get(y).getCorrectChooseEntity());
 			}
 			System.out.println("---------------------------------------------------------------------------------");

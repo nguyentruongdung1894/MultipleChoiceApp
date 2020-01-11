@@ -4,14 +4,16 @@ import java.util.List;
 
 public class ListAQ {
 	private List<QuestionEntity> listQuestionEntity;
+	private List<QuestionEntitySQL> listQuestionEntitySQL;
 
 	public ListAQ() {
 		super();
 	}
 
-	public ListAQ(List<QuestionEntity> listQuestionEntity) {
+	public ListAQ(List<QuestionEntity> listQuestionEntity, List<QuestionEntitySQL> listQuestionEntitySQL) {
 		super();
 		this.listQuestionEntity = listQuestionEntity;
+		this.listQuestionEntitySQL = listQuestionEntitySQL;
 	}
 
 	public List<QuestionEntity> getListQuestionEntity() {
@@ -20,6 +22,14 @@ public class ListAQ {
 
 	public void setListQuestionEntity(List<QuestionEntity> listQuestionEntity) {
 		this.listQuestionEntity = listQuestionEntity;
+	}
+
+	public List<QuestionEntitySQL> getListQuestionEntitySQL() {
+		return listQuestionEntitySQL;
+	}
+
+	public void setListQuestionEntitySQL(List<QuestionEntitySQL> listQuestionEntitySQL) {
+		this.listQuestionEntitySQL = listQuestionEntitySQL;
 	}
 
 }
