@@ -37,13 +37,13 @@
 			</div>
 			<div class="form">
 				<form:form action="get-random-questions" modelAttribute="examEntity"
-					method="post">
+					method="post" onsubmit="return validateForm()" name="myForm">
 					<div class="row">
 						<div class="col-sm-2 lable">
 							<label for="">Full name:</label>
 						</div>
 						<div class="col-sm-10 inputdiv">
-							<input type="text" class="form-control" id=""
+							<input type="text" class="form-control" id="fullName"
 								placeholder="Enter fullname" name="fullName"> <label
 								class="check">(*)</label>
 						</div>
@@ -51,7 +51,7 @@
 							<label for="">Phone:</label>
 						</div>
 						<div class="col-sm-10 input">
-							<input type="text" class="form-control" id=""
+							<input type="text" class="form-control" id="phone"
 								placeholder="Enter phone" name="phone"> <label
 								class="check">(*)</label>
 						</div>
@@ -59,7 +59,7 @@
 							<label for="">Email:</label>
 						</div>
 						<div class="col-sm-10 input">
-							<input type="text" class="form-control" id=""
+							<input type="text" class="form-control" id="email"
 								placeholder="Enter email" name="email"> <label
 								class="check">(*)</label>
 						</div>
@@ -82,6 +82,51 @@
 			</div>
 		</div>
 	</div>
+
+	<div id="myModal" class="modal">
+		<div class="modal-content">
+			<div
+				style="border-bottom: 1px black solid; padding: 5px; background: #ee7c04">Loi
+				input</div>
+			<div style="text-align: center; margin: 10px">
+				Hay input <span id="title"></span>
+			</div>
+			<div style="text-align: center; margin: 10px">
+				<button
+					style="background: #ee7c04; padding: 5px 35px; border: 1px black solid"
+					onclick="document.getElementById('myModal').style.display='none'">OK</button>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		function validateForm() {
+			var fullName = document.forms["myForm"]["fullName"].value;
+			var phone = document.forms["myForm"]["phone"].value;
+			var email = document.forms["myForm"]["email"].value;
+			if (fullName == "") {
+				document.getElementById("myModal").style.display = "block";
+				document.getElementById("title").innerHTML = "full name";
+				return false;
+			}
+			if (phone == "") {
+				document.getElementById("myModal").style.display = "block";
+				document.getElementById("title").innerHTML = "phone";
+				return false;
+			}
+			if (email == "") {
+				document.getElementById("myModal").style.display = "block";
+				document.getElementById("title").innerHTML = "email";
+				return false;
+			}
+		}
+		var modal = document.getElementById("myModal");
+		window.onclick = function(event) {
+			if (event.target == modal) {
+				modal.style.display = "none";
+			}
+		}
+	</script>
 	<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>
