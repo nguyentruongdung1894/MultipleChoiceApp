@@ -6,6 +6,7 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html>
+<head>
 <title>W3.CSS</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel='stylesheet'
@@ -15,9 +16,7 @@
 <script language="JavaScript" type="text/javascript">
 	var t = setTimeout("document.myform.submit();", 1500000); //2 seconds measured in miliseconds
 </script>
-<style>
-</style>
-
+</head>
 <body>
 	<div class="">
 		<div class="row">
@@ -160,24 +159,26 @@
 							</button>
 							<button type="button" class="btn btnSubmit" id="btnSubmit"
 								style="display: none;"
-								onclick="document.getElementById('id01').style.display='block'">
+								onclick="document.getElementById('myModal').style.display='block'">
 								<span id="next" style="font-weight: bold;">Submit</span>
 							</button>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div id="id01"
-				style="left: 29%; position: fixed; display: none; background: white; width: 540px; height: 210px; top: 30%; border: 1px black solid">
-				<div style="width: 100%; padding: 5px 10px; background: #ee7c04">
-					Xan nhan</div>
-				<div style="text-align: center; margin-top: 30px">
-					<b>Ban se khong the thay doi ket qua sau khi submit?</b>
-				</div>
-				<div style="text-align: center; margin-top: 40px;">
-					<button type="submit" class="btn" style="margin-right: 120px">OK</button>
-					<button type="button" class="btn" style="margin-left: 120px"
-						onclick="document.getElementById('id01').style.display='none'">Cancel</button>
+			<div id="myModal" class="modal">
+				<div class="modal-content">
+					<div
+						style="border-bottom: 1px black solid; padding: 5px; background: #ee7c04">Xac
+						nhan</div>
+					<div style="text-align: center; margin-top: 30px">
+						<b>Ban se khong the thay doi ket qua sau khi submit?</b>
+					</div>
+					<div style="text-align: center; margin: 40px;">
+						<button type="submit" class="btn" style="margin-right: 120px">OK</button>
+						<button type="button" class="btn" style="margin-left: 120px"
+							onclick="document.getElementById('myModal').style.display='none'">Cancel</button>
+					</div>
 				</div>
 			</div>
 		</form:form>
@@ -189,6 +190,14 @@
 	<script
 		src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/js/bootstrap.min.js'></script>
 	<script src="<c:url value="/resources/js/sketch.js" />"></script>
+	<script type="text/javascript">
+		var modal = document.getElementById("myModal");
+		window.onclick = function(event) {
+			if (event.target == modal) {
+				modal.style.display = "none";
+			}
+		}
+	</script>
 	<script>
 		var slideIndex = 1;
 		showDivs(slideIndex);
@@ -203,13 +212,10 @@
 				document.getElementById("btnP").disabled = false;
 			}
 			if (slideIndex == 10) {
-				//document.getElementById("next").innerHTML = "Submit";
 				document.getElementById("btnNext").style.display = "none";
 				document.getElementById("btnSubmit").style.display = "inline-block";
 				document.getElementById("btnSubmit").style.background = "green";
 			} else {
-				//document.getElementById("next").innerHTML = "Next";
-				//document.getElementById("btnSub").type = "button";
 				document.getElementById("btnNext").style.display = "inline-block";
 				document.getElementById("btnSubmit").style.display = "none";
 			}

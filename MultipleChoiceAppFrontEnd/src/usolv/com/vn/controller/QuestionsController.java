@@ -18,13 +18,11 @@ import usolv.com.vn.DAO.QuestionDAO;
 import usolv.com.vn.DAO.Impl.CategoryDAOImpl;
 import usolv.com.vn.DAO.Impl.ExamDAOImpl;
 import usolv.com.vn.DAO.Impl.QuestionDAOImpl;
-import usolv.com.vn.entitys.AnswerEntity;
 import usolv.com.vn.entitys.CategoryEntity;
 import usolv.com.vn.entitys.CorrectChooseEntity;
 import usolv.com.vn.entitys.ExamEntity;
 import usolv.com.vn.entitys.ExamResult;
 import usolv.com.vn.entitys.ListAQ;
-import usolv.com.vn.entitys.QuestionEntity;
 
 @Controller
 public class QuestionsController {
