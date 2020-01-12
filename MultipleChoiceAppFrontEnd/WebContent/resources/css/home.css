@@ -28,42 +28,6 @@
 	padding: 5px 0px;
 }
 
-.current-page {
-	display: none;
-}
-
-.page-item {
-	display: none;
-}
-
-.page-itemP {
-	margin-right: 130px;
-	border: 1px black solid;
-	color: black;
-	background-color: #ee7c04;
-	font-weight: bold;
-	padding: 10px 30px;
-}
-
-.page-itemN {
-	margin-left: 130px;
-	border: 1px black solid;
-	background-color: #ee7c04;
-	padding: 10px 30px;
-}
-
-.page-link {
-	font-weight: bold;
-	color: black;
-	background: #ee7c04;
-	border: none;
-}
-
-.page-link:hover {
-	background: #ee7c04;
-	color: black;
-}
-
 .footer {
 	position: fixed;
 	left: 0;
@@ -89,4 +53,10 @@
 	background: #fff;
 	color: #000;
 	border-radius: 5px;
+}
+
+.btn{
+	border: 1px black solid;
+	background: #ee7c04;
+	padding: 10px 35px;
 }

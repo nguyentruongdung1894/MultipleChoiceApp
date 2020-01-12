@@ -5,18 +5,19 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>List Categories</title>
+<html>
+<title>W3.CSS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel='stylesheet'
 	href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css'>
 <script src=<c:url value="/resources/js/fontawesome.js" />></script>
 <link href="<c:url value="/resources/css/home.css" />" rel="stylesheet">
-<script type="text/javascript">
-	var t = setTimeout("document.myform.submit();", 7500000);
-</script>
-</head>
+<!-- <script language="JavaScript" type="text/javascript"> 
+var t = setTimeout("document.myform.submit();",1500000); //2 seconds measured in miliseconds
+</script> -->
+<style>
+</style>
+
 <body>
 	<div class="">
 		<div class="row">
@@ -69,30 +70,34 @@
 			</div>
 		</div>
 	</div>
-	<div class="">
-		<div class="container" id="jar">
-			<div class="row" style="margin-bottom: 10px;">
-				<div class="col-sm-9"></div>
-				<div class="col-sm-3" style="padding-right: 0">
-					<b class="" style="float: right;">Hi: ${examEntity.fullName}</b>
-				</div>
+	<div class="container">
+		<div class="row" style="margin-bottom: 10px;">
+			<div class="col-sm-9"></div>
+			<div class="col-sm-3" style="padding-right: 0">
+				<b class="" style="float: right;">Hi: ${examEntity.fullName}</b>
 			</div>
-			<div class="row">
-				<div class="col-sm-12 title">
-					<b>Theary test: ${categoryName} (20 Question)</b>
-				</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12 title">
+				<input value="${categoryName}" style="display: none;"
+					id="spanCategoryName"> <b>Theary test: <span
+					id="nameTest">${categoryName}</span> (<span id="countQ">20</span> Question)
+
+				</b>
 			</div>
-			<form:form method="POST" action="welcome"
-				modelAttribute="listQuestionsDTO" name="myform">
-				<input type="text" name="fullName" value="${examEntity.fullName}"
-					style="display: none;">
-				<input type="text" name="phone" value="${examEntity.phone}"
-					style="display: none;">
-				<input type="text" name="email" value="${examEntity.email}"
-					style="display: none;">
+		</div>
+		<form:form method="post" action="welcome"
+			modelAttribute="listQuestionsDTO" name="myform">
+			<input type="text" name="fullName" value="${examEntity.fullName}"
+				style="display: none;">
+			<input type="text" name="phone" value="${examEntity.phone}"
+				style="display: none;">
+			<input type="text" name="email" value="${examEntity.email}"
+				style="display: none;">
+			<div class="">
 				<c:forEach var="content"
 					items="${listQuestionsDTO.listQuestionEntity}" varStatus="status">
-					<div class="content">
+					<div class="mySlides" style="width: 100%; height: 400px">
 						<div class="row">
 							<div class="col-sm-12">
 								<input type="text"
@@ -116,14 +121,14 @@
 				<c:forEach var="questionSQL"
 					items="${listQuestionsDTO.listQuestionEntitySQL}"
 					varStatus="status">
-					<div class="content">
+					<div class="mySlides" style="width: 100%; height: 400px">
 						<div class="row">
 							<div class="col-sm-12">
 								<input type="text"
 									name="listQuestionEntitySQL[${status.index}].questionId"
 									value="${questionSQL.questionId}" style="display: none;">
-								<b>Question ${status.count + 5}: ${questionSQL.contentQuestion}
-								</b>
+								<b>Question ${status.count + 5}:
+									${questionSQL.contentQuestion} </b>
 							</div>
 						</div>
 						<div class="row contentAnswer">
@@ -139,20 +144,85 @@
 						</div>
 					</div>
 				</c:forEach>
-				<input type="submit" value="Submit" />
-			</form:form>
-		</div>
-		<nav>
-			<ul class="pagination justify-content-center pagination-sm">
-			</ul>
-		</nav>
+				<div style="text-align: center;">
+					<div class="row">
+						<div class="col-sm-6">
+							<button type="button" class="btn btnPrev" onclick="plusDivs(-1)"
+								id="btnP" disabled="disabled">
+								<span id="prev" style="font-weight: bold;">Prev</span>
+							</button>
+						</div>
+						<div class="col-sm-6">
+							<button type="button" class="btn btnNext" onclick="plusDivs(1)"
+								id="btnNext">
+								<span id="next" style="font-weight: bold;">Next</span>
+							</button>
+							<button type="submit" class="btn btnSubmit" id="btnSubmit"
+								style="display: none;">
+								<span id="next" style="font-weight: bold;">Submit</span>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form:form>
 	</div>
+
 	<jsp:include page="footer.jsp"></jsp:include>
 	<script
 		src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
 	<script
 		src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/js/bootstrap.min.js'></script>
-	<script src="<c:url value="/resources/js/script.js" />"></script>
 	<script src="<c:url value="/resources/js/sketch.js" />"></script>
+	<script>
+		var slideIndex = 1;
+		showDivs(slideIndex);
+
+		function plusDivs(n) {
+			var value = document.getElementById("spanCategoryName").value;
+			console.log(value);
+			showDivs(slideIndex += n);
+			if (slideIndex == 1) {
+				document.getElementById("btnP").disabled = true;
+			} else {
+				document.getElementById("btnP").disabled = false;
+			}
+			if (slideIndex == 10) { 
+				//document.getElementById("next").innerHTML = "Submit";
+				document.getElementById("btnNext").style.display = "none";
+				document.getElementById("btnSubmit").style.display = "inline-block";
+				document.getElementById("btnSubmit").style.background = "green";
+			} else {
+				//document.getElementById("next").innerHTML = "Next";
+				//document.getElementById("btnSub").type = "button";
+				document.getElementById("btnNext").style.display = "inline-block";
+				document.getElementById("btnSubmit").style.display = "none";
+			}
+			if (slideIndex < 6) {
+				document.getElementById("nameTest").innerHTML = value;
+				document.getElementById("countQ").innerHTML = "20";
+			} else {
+				document.getElementById("nameTest").innerHTML = "SQL";
+				document.getElementById("countQ").innerHTML = "10";
+			}
+		}
+
+		function showDivs(n) {
+			var i;
+			var x = document.getElementsByClassName("mySlides");
+			if (n > x.length) {
+				slideIndex = 10
+			}
+			if (n < 1) {
+				slideIndex = 1
+			}
+			for (i = 0; i < x.length; i++) {
+				x[i].style.display = "none";
+			}
+			x[slideIndex - 1].style.display = "block";
+		}
+	</script>
+
 </body>
+
 </html>
