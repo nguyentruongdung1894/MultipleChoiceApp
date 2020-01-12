@@ -6,4 +6,6 @@ import usolv.com.vn.entitys.CategoryEntity;
 
 public interface CategoryDAO {
 	public List<CategoryEntity> GetAllCategories();
+
+	public String GetCategoryByCategoryId(String categoryId);
 }

@@ -48,8 +48,9 @@ public class QuestionsController {
 	@RequestMapping(value = "get-random-questions", method = RequestMethod.POST)
 	public String GetAllQuestion(ModelMap modelmap, @ModelAttribute("examEntity") ExamEntity examEntity,
 			HttpServletRequest request) {
-//		System.out.println(examEntity.getFullName());
 		String categoryId = request.getParameter("categoryId");
+		String categoryName = categoryDAO.GetCategoryByCategoryId(categoryId);
+		request.setAttribute("categoryName", categoryName);
 		ListAQ listAQ = new ListAQ();
 		listAQ.setListQuestionEntity(questionDAO.GetAllQuestions(categoryId));
 		listAQ.setListQuestionEntitySQL(questionDAO.GetAllQuestionsSQL());

@@ -1,3 +1,5 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -14,11 +16,6 @@
 <script type="text/javascript">
 	var t = setTimeout("document.myform.submit();", 7500000);
 </script>
-<script>
-	function myFunction() {
-		document.getElementById("demo").innerHTML = "Hello World";
-	}
-</script>
 </head>
 <body>
 	<div class="">
@@ -27,13 +24,23 @@
 				<img alt="" src="<c:url value="/resources/images/logo.png" />"
 					class="logo">
 			</div>
+			<%
+				Date dNow = new Date();
+				SimpleDateFormat ft = new SimpleDateFormat("yyyy/MM/dd");
+			%>
 			<div class="col-sm-3">
 				<div class="row">
 					<div class="col-sm-12 timeDate">
-						<button onclick="myFunction()">Click me</button>
-						<button onclick="myFunction()">Click me</button>
-						<b>Date <span id="demo"></span>
-						</b>
+						<div class="row">
+							<div class="col-sm-2">
+								<b>Date</b>
+							</div>
+							<div class="col-sm-10">
+								<div class="square">
+									<div class="" id=""><%=ft.format(dNow)%></div>
+								</div>
+							</div>
+						</div>
 					</div>
 					<div class="col-sm-12 timeDate">
 						<div class="row">
@@ -65,14 +72,14 @@
 	<div class="">
 		<div class="container" id="jar">
 			<div class="row" style="margin-bottom: 10px;">
-				<div class="col-sm-10"></div>
-				<div class="col-sm-2">
-					<b class="">Hi: ${examEntity.fullName}</b>
+				<div class="col-sm-9"></div>
+				<div class="col-sm-3" style="padding-right: 0">
+					<b class="" style="float: right;">Hi: ${examEntity.fullName}</b>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-sm-12 title">
-					<b>Theary test: JAVA (20 Question)</b>
+					<b>Theary test: ${categoryName} (20 Question)</b>
 				</div>
 			</div>
 			<form:form method="POST" action="welcome"
@@ -115,7 +122,7 @@
 								<input type="text"
 									name="listQuestionEntitySQL[${status.index}].questionId"
 									value="${questionSQL.questionId}" style="display: none;">
-								<b>Question ${status.count}: ${questionSQL.contentQuestion}
+								<b>Question ${status.count + 5}: ${questionSQL.contentQuestion}
 								</b>
 							</div>
 						</div>

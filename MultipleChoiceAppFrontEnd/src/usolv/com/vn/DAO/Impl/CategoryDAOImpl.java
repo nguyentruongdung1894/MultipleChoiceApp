@@ -1,6 +1,7 @@
 package usolv.com.vn.DAO.Impl;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -53,4 +54,39 @@ public class CategoryDAOImpl implements CategoryDAO {
 //			System.out.println(categoryEntity.getCategoryName());
 //		}
 //	}
+
+	@Override
+	public String GetCategoryByCategoryId(String categoryId) {
+		String categoryName = null;
+		Connection conn = null;
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		String sql = "SELECT CategoryName FROM TB_Category WHERE CategoryId = ?";
+		try {
+			conn = SQLConnection.getConnectionSqlServer();
+			pstm = conn.prepareStatement(sql);
+			pstm.setString(1, categoryId);
+			rs = pstm.executeQuery();
+			while (rs.next()) {
+				categoryName = rs.getString("CategoryName");
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstm.close();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return categoryName;
+	}
+	
+	public static void main(String[] args) {
+		
+	}
 }
