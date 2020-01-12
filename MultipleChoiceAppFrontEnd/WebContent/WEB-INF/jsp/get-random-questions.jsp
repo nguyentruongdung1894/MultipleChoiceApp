@@ -12,9 +12,9 @@
 	href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css'>
 <script src=<c:url value="/resources/js/fontawesome.js" />></script>
 <link href="<c:url value="/resources/css/home.css" />" rel="stylesheet">
-<!-- <script language="JavaScript" type="text/javascript"> 
-var t = setTimeout("document.myform.submit();",1500000); //2 seconds measured in miliseconds
-</script> -->
+<script language="JavaScript" type="text/javascript">
+	var t = setTimeout("document.myform.submit();", 1500000); //2 seconds measured in miliseconds
+</script>
 <style>
 </style>
 
@@ -81,7 +81,8 @@ var t = setTimeout("document.myform.submit();",1500000); //2 seconds measured in
 			<div class="col-sm-12 title">
 				<input value="${categoryName}" style="display: none;"
 					id="spanCategoryName"> <b>Theary test: <span
-					id="nameTest">${categoryName}</span> (<span id="countQ">20</span> Question)
+					id="nameTest">${categoryName}</span> (<span id="countQ">20</span>
+					Question)
 
 				</b>
 			</div>
@@ -102,7 +103,7 @@ var t = setTimeout("document.myform.submit();",1500000); //2 seconds measured in
 							<div class="col-sm-12">
 								<input type="text"
 									name="listQuestionEntity[${status.index}].questionId"
-									value="${content.questionId}" style="display: block;"> <b>Question
+									value="${content.questionId}" style="display: none;"> <b>Question
 									${status.count}: ${content.contentQuestion} </b>
 							</div>
 						</div>
@@ -126,7 +127,7 @@ var t = setTimeout("document.myform.submit();",1500000); //2 seconds measured in
 							<div class="col-sm-12">
 								<input type="text"
 									name="listQuestionEntitySQL[${status.index}].questionId"
-									value="${questionSQL.questionId}" style="display: block;">
+									value="${questionSQL.questionId}" style="display: none;">
 								<b>Question ${status.count + 5}:
 									${questionSQL.contentQuestion} </b>
 							</div>
@@ -157,12 +158,26 @@ var t = setTimeout("document.myform.submit();",1500000); //2 seconds measured in
 								id="btnNext">
 								<span id="next" style="font-weight: bold;">Next</span>
 							</button>
-							<button type="submit" class="btn btnSubmit" id="btnSubmit"
-								style="display: none;">
+							<button type="button" class="btn btnSubmit" id="btnSubmit"
+								style="display: none;"
+								onclick="document.getElementById('id01').style.display='block'">
 								<span id="next" style="font-weight: bold;">Submit</span>
 							</button>
 						</div>
 					</div>
+				</div>
+			</div>
+			<div id="id01"
+				style="left: 29%; position: fixed; display: none; background: white; width: 540px; height: 210px; top: 30%; border: 1px black solid">
+				<div style="width: 100%; padding: 5px 10px; background: #ee7c04">
+					Xan nhan</div>
+				<div style="text-align: center; margin-top: 30px">
+					<b>Ban se khong the thay doi ket qua sau khi submit?</b>
+				</div>
+				<div style="text-align: center; margin-top: 40px;">
+					<button type="submit" class="btn" style="margin-right: 120px">OK</button>
+					<button type="button" class="btn" style="margin-left: 120px"
+						onclick="document.getElementById('id01').style.display='none'">Cancel</button>
 				</div>
 			</div>
 		</form:form>
@@ -187,7 +202,7 @@ var t = setTimeout("document.myform.submit();",1500000); //2 seconds measured in
 			} else {
 				document.getElementById("btnP").disabled = false;
 			}
-			if (slideIndex == 10) { 
+			if (slideIndex == 10) {
 				//document.getElementById("next").innerHTML = "Submit";
 				document.getElementById("btnNext").style.display = "none";
 				document.getElementById("btnSubmit").style.display = "inline-block";
