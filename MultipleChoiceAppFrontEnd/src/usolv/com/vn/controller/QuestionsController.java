@@ -18,11 +18,13 @@ import usolv.com.vn.DAO.QuestionDAO;
 import usolv.com.vn.DAO.Impl.CategoryDAOImpl;
 import usolv.com.vn.DAO.Impl.ExamDAOImpl;
 import usolv.com.vn.DAO.Impl.QuestionDAOImpl;
+import usolv.com.vn.entitys.AnswerEntity;
 import usolv.com.vn.entitys.CategoryEntity;
 import usolv.com.vn.entitys.CorrectChooseEntity;
 import usolv.com.vn.entitys.ExamEntity;
 import usolv.com.vn.entitys.ExamResult;
 import usolv.com.vn.entitys.ListAQ;
+import usolv.com.vn.entitys.QuestionEntity;
 
 @Controller
 public class QuestionsController {
@@ -72,86 +74,97 @@ public class QuestionsController {
 		String phone = request.getParameter("phone");
 		String email = request.getParameter("email");
 		for (int x = 0; x < listQuestionsDTO.getListQuestionEntity().size(); x++) {
-			for (int y = 0; y < listQuestionsDTO.getListQuestionEntity().get(x).getListAnswerEntity().size(); y++) {
-				if (listQuestionsDTO.getListQuestionEntity().get(x).getListAnswerEntity().get(y).getAnswerId() != 0) {
-					rqCount++;
-				}
-			}
-			questionId = listQuestionsDTO.getListQuestionEntity().get(x).getQuestionId();
-			List<CorrectChooseEntity> listCorrectChooseEntity = examDAO.GetCorrectChooseEntity(questionId);
-			if (rqCount == listCorrectChooseEntity.size()) {
-				for (int z = 0; z < listQuestionsDTO.getListQuestionEntity().get(x).getListAnswerEntity().size(); z++) {
-					for (int t = 0; t < listCorrectChooseEntity.size(); t++) {
-						if (listQuestionsDTO.getListQuestionEntity().get(x).getListAnswerEntity().get(z)
-								.getAnswerId() == listCorrectChooseEntity.get(t).getCorrectChooseEntity()) {
-							dem++;
-						}
+			if (listQuestionsDTO.getListQuestionEntity().get(x).getListAnswerEntity() != null) {
+				for (int y = 0; y < listQuestionsDTO.getListQuestionEntity().get(x).getListAnswerEntity().size(); y++) {
+					if (listQuestionsDTO.getListQuestionEntity().get(x).getListAnswerEntity().get(y)
+							.getAnswerId() != 0) {
+						rqCount++;
 					}
 				}
-				if (dem == listCorrectChooseEntity.size()) {
-					score++;
+				questionId = listQuestionsDTO.getListQuestionEntity().get(x).getQuestionId();
+				List<CorrectChooseEntity> listCorrectChooseEntity = examDAO.GetCorrectChooseEntity(questionId);
+				if (rqCount == listCorrectChooseEntity.size()) {
+					for (int z = 0; z < listQuestionsDTO.getListQuestionEntity().get(x).getListAnswerEntity()
+							.size(); z++) {
+						for (int t = 0; t < listCorrectChooseEntity.size(); t++) {
+							if (listQuestionsDTO.getListQuestionEntity().get(x).getListAnswerEntity().get(z)
+									.getAnswerId() == listCorrectChooseEntity.get(t).getCorrectChooseEntity()) {
+								dem++;
+							}
+						}
+					}
+					if (dem == listCorrectChooseEntity.size()) {
+						score++;
+					}
+					dem = 0;
 				}
-				dem = 0;
+				rqCount = 0;
 			}
-			rqCount = 0;
 		}
 		for (int x = 0; x < listQuestionsDTO.getListQuestionEntitySQL().size(); x++) {
-			for (int y = 0; y < listQuestionsDTO.getListQuestionEntitySQL().get(x).getListAnswerEntity().size(); y++) {
-				if (listQuestionsDTO.getListQuestionEntitySQL().get(x).getListAnswerEntity().get(y)
-						.getAnswerId() != 0) {
-					rqCount++;
-				}
-			}
-			questionId = listQuestionsDTO.getListQuestionEntitySQL().get(x).getQuestionId();
-			List<CorrectChooseEntity> listCorrectChooseEntity = examDAO.GetCorrectChooseEntity(questionId);
-			if (rqCount == listCorrectChooseEntity.size()) {
-				for (int z = 0; z < listQuestionsDTO.getListQuestionEntitySQL().get(x).getListAnswerEntity()
-						.size(); z++) {
-					for (int t = 0; t < listCorrectChooseEntity.size(); t++) {
-						if (listQuestionsDTO.getListQuestionEntitySQL().get(x).getListAnswerEntity().get(z)
-								.getAnswerId() == listCorrectChooseEntity.get(t).getCorrectChooseEntity()) {
-							dem++;
-						}
+			if (listQuestionsDTO.getListQuestionEntitySQL().get(x).getListAnswerEntity() != null) {
+				for (int y = 0; y < listQuestionsDTO.getListQuestionEntitySQL().get(x).getListAnswerEntity()
+						.size(); y++) {
+					if (listQuestionsDTO.getListQuestionEntitySQL().get(x).getListAnswerEntity().get(y)
+							.getAnswerId() != 0) {
+						rqCount++;
 					}
 				}
-				if (dem == listCorrectChooseEntity.size()) {
-					score++;
+				questionId = listQuestionsDTO.getListQuestionEntitySQL().get(x).getQuestionId();
+				List<CorrectChooseEntity> listCorrectChooseEntity = examDAO.GetCorrectChooseEntity(questionId);
+				if (rqCount == listCorrectChooseEntity.size()) {
+					for (int z = 0; z < listQuestionsDTO.getListQuestionEntitySQL().get(x).getListAnswerEntity()
+							.size(); z++) {
+						for (int t = 0; t < listCorrectChooseEntity.size(); t++) {
+							if (listQuestionsDTO.getListQuestionEntitySQL().get(x).getListAnswerEntity().get(z)
+									.getAnswerId() == listCorrectChooseEntity.get(t).getCorrectChooseEntity()) {
+								dem++;
+							}
+						}
+					}
+					if (dem == listCorrectChooseEntity.size()) {
+						score++;
+					}
+					dem = 0;
 				}
-				dem = 0;
+				rqCount = 0;
 			}
-			rqCount = 0;
 		}
 		ExamEntity examEntity = new ExamEntity(fullName, phone, email, date, score, true);
 		examDAO.addExam(examEntity);
 		ExamEntity listExam = examDAO.GetExamEntity();
 		int examId = listExam.getExamId();
 		for (int i = 0; i < listQuestionsDTO.getListQuestionEntity().size(); i++) {
-			questionId = listQuestionsDTO.getListQuestionEntity().get(i).getQuestionId();
-			for (int index = 0; index < listQuestionsDTO.getListQuestionEntity().get(i).getListAnswerEntity()
-					.size(); index++) {
-				if (listQuestionsDTO.getListQuestionEntity().get(i).getListAnswerEntity().get(index)
-						.getAnswerId() == 0) {
-					continue;
-				} else {
-					answerId = listQuestionsDTO.getListQuestionEntity().get(i).getListAnswerEntity().get(index)
-							.getAnswerId();
-					ExamResult examResult = new ExamResult(examId, answerId, questionId);
-					examDAO.addExamResult(examResult);
+			if (listQuestionsDTO.getListQuestionEntity().get(i).getListAnswerEntity() != null) {
+				questionId = listQuestionsDTO.getListQuestionEntity().get(i).getQuestionId();
+				for (int index = 0; index < listQuestionsDTO.getListQuestionEntity().get(i).getListAnswerEntity()
+						.size(); index++) {
+					if (listQuestionsDTO.getListQuestionEntity().get(i).getListAnswerEntity().get(index)
+							.getAnswerId() == 0) {
+						continue;
+					} else {
+						answerId = listQuestionsDTO.getListQuestionEntity().get(i).getListAnswerEntity().get(index)
+								.getAnswerId();
+						ExamResult examResult = new ExamResult(examId, answerId, questionId);
+						examDAO.addExamResult(examResult);
+					}
 				}
 			}
 		}
 		for (int i = 0; i < listQuestionsDTO.getListQuestionEntitySQL().size(); i++) {
-			questionId = listQuestionsDTO.getListQuestionEntitySQL().get(i).getQuestionId();
-			for (int index = 0; index < listQuestionsDTO.getListQuestionEntitySQL().get(i).getListAnswerEntity()
-					.size(); index++) {
-				if (listQuestionsDTO.getListQuestionEntitySQL().get(i).getListAnswerEntity().get(index)
-						.getAnswerId() == 0) {
-					continue;
-				} else {
-					answerId = listQuestionsDTO.getListQuestionEntitySQL().get(i).getListAnswerEntity().get(index)
-							.getAnswerId();
-					ExamResult examResult = new ExamResult(examId, answerId, questionId);
-					examDAO.addExamResult(examResult);
+			if (listQuestionsDTO.getListQuestionEntitySQL().get(i).getListAnswerEntity() != null) {
+				questionId = listQuestionsDTO.getListQuestionEntitySQL().get(i).getQuestionId();
+				for (int index = 0; index < listQuestionsDTO.getListQuestionEntitySQL().get(i).getListAnswerEntity()
+						.size(); index++) {
+					if (listQuestionsDTO.getListQuestionEntitySQL().get(i).getListAnswerEntity().get(index)
+							.getAnswerId() == 0) {
+						continue;
+					} else {
+						answerId = listQuestionsDTO.getListQuestionEntitySQL().get(i).getListAnswerEntity().get(index)
+								.getAnswerId();
+						ExamResult examResult = new ExamResult(examId, answerId, questionId);
+						examDAO.addExamResult(examResult);
+					}
 				}
 			}
 		}

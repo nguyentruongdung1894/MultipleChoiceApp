@@ -102,7 +102,7 @@ var t = setTimeout("document.myform.submit();",1500000); //2 seconds measured in
 							<div class="col-sm-12">
 								<input type="text"
 									name="listQuestionEntity[${status.index}].questionId"
-									value="${content.questionId}" style="display: none;"> <b>Question
+									value="${content.questionId}" style="display: block;"> <b>Question
 									${status.count}: ${content.contentQuestion} </b>
 							</div>
 						</div>
@@ -126,7 +126,7 @@ var t = setTimeout("document.myform.submit();",1500000); //2 seconds measured in
 							<div class="col-sm-12">
 								<input type="text"
 									name="listQuestionEntitySQL[${status.index}].questionId"
-									value="${questionSQL.questionId}" style="display: none;">
+									value="${questionSQL.questionId}" style="display: block;">
 								<b>Question ${status.count + 5}:
 									${questionSQL.contentQuestion} </b>
 							</div>
