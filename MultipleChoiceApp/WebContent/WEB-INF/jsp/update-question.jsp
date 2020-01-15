@@ -1,3 +1,4 @@
+<%@page import="usolv.com.vn.entitys.QuestionEntity"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -52,9 +53,21 @@
 					<div class="row">
 						<div class="col-sm-6">
 							<ul class="form-style-1">
+
+								<%
+									QuestionEntity questionEntity = (QuestionEntity) request.getAttribute("questionEntity");
+										int length = String.valueOf(questionEntity.getQuestionId()).length();
+										for (int i = 0; i < 4 - length; i++) {
+								%>
+
+								<%
+									}
+								%>
 								<li><label>Quest ID</label> <input type="text"
 									name="questionId" class="field-divided" placeholder="Quest ID"
 									value="${questionEntity.questionId}" /></li>
+
+
 								<li><label>Text</label> <textarea name="contentQuestion"
 										class="field-long field-textarea">${questionEntity.contentQuestion}</textarea></li>
 								<li><label>Category</label> <select name="categoryId"
@@ -74,13 +87,17 @@
 										<option value="true">Display</option>
 										<option value="false">Hide</option>
 								</select></li>
-								<li style="display: inline-block; float: left; margin-right: 20px;"><input
+								<li
+									style="display: inline-block; float: left; margin-right: 20px;"><input
 									type="submit" value="Update" /></li>
-								<li style="display: inline-block; float: left; margin-right: 20px; background-color: #4b99ad; padding: 8px">
-									<a href="deleteQuestion?questionId=${questionEntity.questionId}" style="color: white; text-decoration: none;">Delete</a>
+								<li
+									style="display: inline-block; float: left; margin-right: 20px; background-color: #4b99ad; padding: 8px">
+									<a
+									href="deleteQuestion?questionId=${questionEntity.questionId}"
+									style="color: white; text-decoration: none;">Delete</a>
 								</li>
-								<li style="display: inline-block; float: left;"><input type=button value="Cancel"
-									onclick="history.go(-1)" /></li>
+								<li style="display: inline-block; float: left;"><input
+									type=button value="Cancel" onclick="history.go(-1)" /></li>
 							</ul>
 						</div>
 						<div class="col-sm-6">

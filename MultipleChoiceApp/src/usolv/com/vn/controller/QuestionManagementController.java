@@ -109,13 +109,24 @@ public class QuestionManagementController {
 	}
 
 	@RequestMapping(value = "update-question-succ", method = RequestMethod.POST)
-	public String updateQuestionSucc(HttpServletRequest request) {
+	public String updateQuestionSucc(HttpServletRequest request,
+			@ModelAttribute("listAnswers") AnswerListEntity listAnswers) {
 		String model = null;
 		int questionId = Integer.parseInt(request.getParameter("questionId"));
 		String categoryId = request.getParameter("categoryId");
 		String contentQuestion = request.getParameter("contentQuestion");
 		boolean type = Boolean.parseBoolean(request.getParameter("type"));
 		boolean status = Boolean.parseBoolean(request.getParameter("status"));
+
+		for (int index = 0; index < listAnswers.getAnswerEntitys().size(); index++) {
+			int ansId = listAnswers.getAnswerEntitys().get(index).getAnswerId();
+			int qusId = questionId;
+			String ctenAnswer = listAnswers.getAnswerEntitys().get(index).getContentAnswer();
+			boolean crectAnswer = listAnswers.getAnswerEntitys().get(index).isCorrectAnswer();
+			AnswerEntity answerEntity = new AnswerEntity(ansId, qusId, ctenAnswer, crectAnswer);
+			answerDAO.UpdateAnswers(answerEntity);
+		}
+
 		QuestionEntity questionEntity = new QuestionEntity(questionId, "A00001", categoryId, contentQuestion, type,
 				status);
 		if (questionDAO.UpdateQuestion(questionEntity)) {
@@ -123,6 +134,7 @@ public class QuestionManagementController {
 		} else {
 			model = "error";
 		}
+
 		return model;
 	}
 }

@@ -62,7 +62,7 @@ public class AnswerDAOImpl implements AnswerDAO {
 //		boolean check = asd.AddAnswers(answerList);
 //		System.out.println(check);
 //	}
-	
+
 	@Override
 	public List<AnswerEntity> GetAnswersByAnswersId(int answersId) {
 		Connection conn = null;
@@ -100,8 +100,28 @@ public class AnswerDAOImpl implements AnswerDAO {
 	}
 
 	@Override
-	public boolean UpdateAnswers(List<AnswerEntity> answerList) throws SQLException {
-		// TODO Auto-generated method stub
-		return false;
+	public void UpdateAnswers(AnswerEntity answerList) {
+		Connection conn = SQLConnection.getConnectionSqlServer();
+		PreparedStatement pstm = null;
+		String sql = "update TB_Answer set QuestionId = ?,ContentAnswer=?, CorrectAnswer =? where  AnswerId = ?";
+		try {
+			pstm = conn.prepareStatement(sql);
+			pstm.setInt(1, answerList.getQuestionId());
+			pstm.setString(2, answerList.getContentAnswer());
+			pstm.setBoolean(3, answerList.isCorrectAnswer());
+			pstm.setInt(4, answerList.getAnswerId());
+			pstm.executeUpdate();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			try {
+				pstm.close();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 }

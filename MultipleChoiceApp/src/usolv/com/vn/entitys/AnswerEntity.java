@@ -10,6 +10,14 @@ public class AnswerEntity {
 		super();
 	}
 
+	public AnswerEntity(int answerId, int questionId, String contentAnswer, boolean correctAnswer) {
+		super();
+		this.answerId = answerId;
+		this.questionId = questionId;
+		this.contentAnswer = contentAnswer;
+		this.correctAnswer = correctAnswer;
+	}
+
 	public AnswerEntity(int questionId, String contentAnswer, boolean correctAnswer) {
 		super();
 		this.questionId = questionId;

@@ -10,5 +10,5 @@ public interface AnswerDAO {
 
 	public List<AnswerEntity> GetAnswersByAnswersId(int answersId);
 
-	public boolean UpdateAnswers(List<AnswerEntity> answerList) throws SQLException;
+	public void UpdateAnswers(AnswerEntity answerList);
 }

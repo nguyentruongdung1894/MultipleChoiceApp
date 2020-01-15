@@ -11,6 +11,7 @@ import usolv.com.vn.entitys.QuestionEntity;
 
 public class QuestionDTO {
 	private int id;
+	private int length;
 	private int questionId;
 	private String contentQuestion;
 	private String categoryName;
@@ -69,6 +70,14 @@ public class QuestionDTO {
 		this.type = type;
 	}
 
+	public int getLength() {
+		return length;
+	}
+
+	public void setLength(int length) {
+		this.length = length;
+	}
+
 	public String getCategoryName(String categoryId) {
 		String categoryName = null;
 		CategoryDAO categoryDAO = new CategoryDAOImpl();
@@ -84,7 +93,10 @@ public class QuestionDTO {
 		for (QuestionEntity questionEntity : listQuestionEntity) {
 			QuestionDTO questionDTO = new QuestionDTO();
 			questionDTO.setId(index);
+
+			int length = String.valueOf(questionEntity.getQuestionId()).length();
 			questionDTO.setQuestionId(questionEntity.getQuestionId());
+			questionDTO.setLength(length);
 			questionDTO.setContentQuestion(questionEntity.getContentQuestion());
 			questionDTO.setCategoryName(new QuestionDTO().getCategoryName(questionEntity.getCategoryId()));
 			if (questionEntity.isType()) {
